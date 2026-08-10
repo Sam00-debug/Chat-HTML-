@@ -2,37 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
   >
+
+  <meta name="theme-color" content="#10151d">
 
   <title>MyChat</title>
 
   <style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
 
-    :root {
-      --bg: #0b0f14;
-      --panel: #121821;
-      --panel2: #18212c;
-      --border: #26313d;
-      --text: #f5f7fa;
-      --muted: #8d9aaa;
-      --blue: #4d8dff;
-      --blue2: #2868d8;
-      --danger: #ff6b6b;
-      --success: #55d98b;
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
     }
 
     body {
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
       font-family:
         Inter,
         system-ui,
@@ -40,372 +39,931 @@
         BlinkMacSystemFont,
         "Segoe UI",
         sans-serif;
+
+      color: #fff;
+      background: #080b10;
     }
 
-    /* APP */
+
+    /* =====================================================
+       BACKGROUND
+    ===================================================== */
+
+    body::before {
+      content: "";
+
+      position: fixed;
+      inset: 0;
+
+      z-index: -2;
+
+      background-image:
+        linear-gradient(
+          rgba(5, 8, 13, 0.62),
+          rgba(5, 8, 13, 0.82)
+        ),
+        url("https://images.unsplash.com/photo-1755973707174-47be69f3d037?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    body::after {
+      content: "";
+
+      position: fixed;
+      inset: 0;
+
+      z-index: -1;
+
+      background:
+        radial-gradient(
+          circle at top,
+          rgba(70, 120, 255, 0.12),
+          transparent 40%
+        );
+    }
+
+
+    /* =====================================================
+       LOGIN SCREEN
+    ===================================================== */
+
+    .login-screen {
+      position: fixed;
+      inset: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background:
+        rgba(5, 8, 13, 0.55);
+
+      z-index: 100;
+    }
+
+    .login-card {
+      width: min(420px, 100%);
+
+      padding: 32px;
+
+      border-radius: 24px;
+
+      background:
+        rgba(18, 24, 33, 0.88);
+
+      border: 1px solid rgba(255,255,255,0.1);
+
+      box-shadow:
+        0 25px 80px rgba(0,0,0,0.55);
+
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      text-align: center;
+    }
+
+    .login-logo {
+      width: 72px;
+      height: 72px;
+
+      margin: 0 auto 18px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #5b8cff,
+          #356be0
+        );
+
+      font-size: 34px;
+
+      box-shadow:
+        0 12px 35px rgba(60,120,255,0.3);
+    }
+
+    .login-card h1 {
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .login-card p {
+      color: #9da8b7;
+      font-size: 14px;
+      line-height: 1.5;
+      margin-bottom: 25px;
+    }
+
+    .name-input {
+      width: 100%;
+
+      padding: 15px 16px;
+
+      border: 1px solid #303b49;
+
+      border-radius: 14px;
+
+      outline: none;
+
+      background: #171f29;
+
+      color: white;
+
+      font-size: 15px;
+    }
+
+    .name-input:focus {
+      border-color: #568cff;
+
+      box-shadow:
+        0 0 0 3px rgba(86,140,255,0.12);
+    }
+
+    .login-button {
+      width: 100%;
+
+      margin-top: 12px;
+
+      padding: 15px;
+
+      border: 0;
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #5a91ff,
+          #326ddd
+        );
+
+      color: white;
+
+      font-size: 15px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition: 0.2s;
+    }
+
+    .login-button:active {
+      transform: scale(0.98);
+    }
+
+    .login-error {
+      min-height: 18px;
+
+      margin-top: 10px;
+
+      color: #ff8585;
+
+      font-size: 12px;
+    }
+
+
+    /* =====================================================
+       APP
+    ===================================================== */
 
     .app {
       width: 100%;
-      height: 100vh;
       height: 100dvh;
+
       display: flex;
       flex-direction: column;
-      background: var(--panel);
+
+      background:
+        rgba(9, 13, 19, 0.45);
     }
 
-    /* HEADER */
 
-    .header {
-      min-height: 68px;
-      padding: 12px 18px;
+    /* =====================================================
+       TOP BAR
+    ===================================================== */
+
+    .topbar {
+      flex-shrink: 0;
+
+      min-height: 70px;
+
+      padding:
+        max(10px, env(safe-area-inset-top))
+        max(15px, env(safe-area-inset-right))
+        10px
+        max(15px, env(safe-area-inset-left));
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       gap: 15px;
-      background: #10161e;
-      border-bottom: 1px solid var(--border);
+
+      background:
+        rgba(12, 17, 24, 0.88);
+
+      border-bottom:
+        1px solid rgba(255,255,255,0.08);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
     .brand {
       display: flex;
       align-items: center;
+
       gap: 11px;
+
+      min-width: 0;
     }
 
-    .logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 13px;
+    .brand-logo {
+      width: 43px;
+      height: 43px;
+
+      flex-shrink: 0;
+
       display: grid;
       place-items: center;
-      background: var(--blue);
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #5c92ff,
+          #356bdc
+        );
+
       font-size: 21px;
     }
 
-    .title {
-      font-size: 19px;
-      font-weight: 700;
+    .brand-text {
+      min-width: 0;
     }
 
-    .subtitle {
-      color: var(--muted);
-      font-size: 12px;
+    .brand-title {
+      font-size: 18px;
+      font-weight: 750;
+    }
+
+    .brand-subtitle {
       margin-top: 2px;
+
+      color: #8f9aaa;
+
+      font-size: 11px;
     }
 
-    .status {
+    .connection {
       display: flex;
       align-items: center;
-      gap: 6px;
-      color: var(--muted);
+
+      gap: 7px;
+
+      color: #8f9aaa;
+
       font-size: 12px;
+
       white-space: nowrap;
     }
 
-    .status-dot {
+    .connection-dot {
       width: 8px;
       height: 8px;
+
       border-radius: 50%;
-      background: var(--muted);
+
+      background: #858c95;
     }
 
-    .status.connected {
-      color: var(--success);
+    .connection.connected {
+      color: #62dc91;
     }
 
-    .status.connected .status-dot {
-      background: var(--success);
+    .connection.connected .connection-dot {
+      background: #62dc91;
+
+      box-shadow:
+        0 0 10px rgba(98,220,145,0.7);
     }
 
-    .status.error {
-      color: var(--danger);
+    .connection.error {
+      color: #ff7777;
     }
 
-    .status.error .status-dot {
-      background: var(--danger);
+    .connection.error .connection-dot {
+      background: #ff7777;
     }
 
-    /* MESSAGES */
+
+    /* =====================================================
+       CHAT AREA
+    ===================================================== */
 
     .messages {
       flex: 1;
+
+      min-height: 0;
+
       overflow-y: auto;
-      padding: 20px;
+
+      padding:
+        20px
+        max(15px, calc((100vw - 1000px) / 2));
+
       scroll-behavior: smooth;
+
+      overscroll-behavior: contain;
     }
 
+    .messages::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .messages::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,0.15);
+
+      border-radius: 10px;
+    }
+
+
+    /* =====================================================
+       EMPTY
+    ===================================================== */
+
     .empty {
-      height: 100%;
-      display: grid;
-      place-items: center;
+      min-height: 100%;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
       text-align: center;
-      color: var(--muted);
+
+      color: #8d98a7;
     }
 
     .empty-icon {
       font-size: 45px;
+
       margin-bottom: 10px;
     }
 
     .empty p {
       font-size: 14px;
+
+      line-height: 1.5;
     }
+
+
+    /* =====================================================
+       MESSAGE
+    ===================================================== */
 
     .message {
       display: flex;
-      margin-bottom: 13px;
-    }
 
-    .bubble {
-      max-width: min(75%, 600px);
-      padding: 10px 13px;
-      border-radius: 15px;
-      background: var(--panel2);
-      border: 1px solid var(--border);
+      width: 100%;
+
+      margin-bottom: 16px;
     }
 
     .message.mine {
       justify-content: flex-end;
     }
 
-    .message.mine .bubble {
-      background: var(--blue2);
-      border-color: var(--blue2);
+    .message-content {
+      max-width: min(75%, 650px);
     }
 
-    .user {
-      font-size: 12px;
-      font-weight: 700;
-      color: #8db8ff;
-      margin-bottom: 4px;
-    }
+    .bubble {
+      padding: 11px 14px;
 
-    .mine .user {
-      color: #dce8ff;
-    }
+      border-radius: 17px;
 
-    .text {
-      font-size: 15px;
-      line-height: 1.4;
+      background:
+        rgba(25, 33, 44, 0.92);
+
+      border:
+        1px solid rgba(255,255,255,0.07);
+
+      box-shadow:
+        0 5px 20px rgba(0,0,0,0.12);
+
       word-break: break-word;
+    }
+
+    .mine .bubble {
+      background:
+        linear-gradient(
+          135deg,
+          #3977ed,
+          #285fc8
+        );
+
+      border-color:
+        rgba(255,255,255,0.08);
+    }
+
+    .username {
+      margin-bottom: 4px;
+
+      font-size: 12px;
+
+      font-weight: 750;
+    }
+
+    .message-text {
+      font-size: 15px;
+
+      line-height: 1.45;
+
       white-space: pre-wrap;
     }
 
-    .meta {
+    /*
+      Time is OUTSIDE the bubble.
+    */
+
+    .message-meta {
+      margin-top: 4px;
+
+      padding: 0 6px;
+
       display: flex;
-      gap: 7px;
-      align-items: center;
-      margin-top: 5px;
-      color: #8390a0;
+
+      justify-content: flex-start;
+
+      gap: 6px;
+
+      color: #8b96a5;
+
       font-size: 10px;
     }
 
-    .mine .meta {
-      color: #c8dcff;
+    .mine .message-meta {
+      justify-content: flex-end;
     }
 
-    .source {
-      opacity: .8;
+
+    /* =====================================================
+       BOTTOM BAR
+    ===================================================== */
+
+    .bottom-bar {
+      flex-shrink: 0;
+
+      padding:
+        10px
+        max(12px, env(safe-area-inset-right))
+        max(10px, env(safe-area-inset-bottom))
+        max(12px, env(safe-area-inset-left));
+
+      background:
+        rgba(12, 17, 24, 0.91);
+
+      border-top:
+        1px solid rgba(255,255,255,0.08);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
     }
 
-    /* ERROR */
-
-    .error-box {
-      display: none;
-      padding: 10px 15px;
-      background: #35191d;
-      border-top: 1px solid #6d2a31;
-      color: #ffb4b4;
-      font-size: 12px;
-    }
-
-    .error-box.show {
-      display: block;
-    }
-
-    /* INPUT */
-
-    .input-area {
-      padding: 12px;
-      background: #10161e;
-      border-top: 1px solid var(--border);
-    }
-
-    .input-row {
+    .composer {
       width: 100%;
+
+      max-width: 1100px;
+
+      margin: auto;
+
       display: flex;
+
+      align-items: center;
+
       gap: 8px;
     }
 
-    input {
-      border: 1px solid var(--border);
+    .message-input {
+      flex: 1;
+
+      min-width: 0;
+
+      height: 48px;
+
+      padding: 0 15px;
+
+      border-radius: 16px;
+
+      border: 1px solid #303b49;
+
       outline: none;
-      background: #1a232e;
-      color: var(--text);
-      padding: 12px 14px;
-      border-radius: 13px;
+
+      background: #18212c;
+
+      color: white;
+
       font-size: 14px;
     }
 
-    input:focus {
-      border-color: var(--blue);
+    .message-input:focus {
+      border-color: #4e83ef;
+
+      box-shadow:
+        0 0 0 3px rgba(78,131,239,0.1);
     }
 
-    #username {
-      width: 125px;
-    }
+    .emoji-button {
+      width: 48px;
+      height: 48px;
 
-    #messageInput {
-      flex: 1;
-      min-width: 0;
-    }
+      flex-shrink: 0;
 
-    button {
-      border: 0;
-      background: var(--blue);
+      border: 1px solid #303b49;
+
+      border-radius: 15px;
+
+      background: #18212c;
+
       color: white;
-      padding: 0 20px;
-      border-radius: 13px;
-      font-weight: 700;
+
+      font-size: 22px;
+
       cursor: pointer;
-      min-width: 75px;
     }
 
-    button:hover {
-      background: #6099ff;
+    .send-button {
+      height: 48px;
+
+      padding: 0 20px;
+
+      flex-shrink: 0;
+
+      border: 0;
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #5a91ff,
+          #326ddd
+        );
+
+      color: white;
+
+      font-weight: 750;
+
+      cursor: pointer;
     }
 
-    button:disabled {
-      opacity: .55;
+    .send-button:disabled {
+      opacity: 0.55;
+
       cursor: not-allowed;
     }
 
-    /* DESKTOP */
 
-    @media (min-width: 700px) {
+    /* =====================================================
+       EMOJI PICKER
+    ===================================================== */
+
+    .emoji-picker {
+      position: absolute;
+
+      right: 12px;
+
+      bottom: 75px;
+
+      width: min(320px, calc(100vw - 24px));
+
+      padding: 12px;
+
+      display: none;
+
+      grid-template-columns:
+        repeat(8, 1fr);
+
+      gap: 5px;
+
+      border-radius: 18px;
+
+      background:
+        rgba(20, 27, 36, 0.97);
+
+      border:
+        1px solid rgba(255,255,255,0.1);
+
+      box-shadow:
+        0 15px 50px rgba(0,0,0,0.5);
+
+      backdrop-filter: blur(20px);
+
+      z-index: 20;
+    }
+
+    .emoji-picker.open {
+      display: grid;
+    }
+
+    .emoji {
+      height: 34px;
+
+      display: grid;
+      place-items: center;
+
+      border: 0;
+
+      border-radius: 8px;
+
+      background: transparent;
+
+      font-size: 20px;
+
+      cursor: pointer;
+    }
+
+    .emoji:hover {
+      background: rgba(255,255,255,0.1);
+    }
+
+
+    /* =====================================================
+       DESKTOP
+    ===================================================== */
+
+    @media (min-width: 800px) {
+
       body {
         display: flex;
-        justify-content: center;
+
         align-items: center;
-        padding: 25px;
+        justify-content: center;
+
+        padding: 20px;
       }
 
       .app {
-        max-width: 900px;
-        height: min(900px, 94vh);
-        border: 1px solid var(--border);
-        border-radius: 18px;
+        width: min(1200px, 100%);
+
+        height: min(900px, 96dvh);
+
+        border:
+          1px solid rgba(255,255,255,0.1);
+
+        border-radius: 22px;
+
         overflow: hidden;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+
+        box-shadow:
+          0 30px 100px rgba(0,0,0,0.45);
+      }
+
+      .topbar {
+        min-height: 76px;
+
+        padding-left: 22px;
+        padding-right: 22px;
       }
 
       .messages {
-        padding: 25px;
+        padding-top: 25px;
+        padding-bottom: 25px;
       }
 
-      .input-area {
-        padding: 15px 20px;
+      .bottom-bar {
+        padding: 15px 22px;
       }
+
     }
 
-    /* PHONE */
 
-    @media (max-width: 500px) {
+    /* =====================================================
+       SMALL PHONES
+    ===================================================== */
 
-      .header {
-        min-height: 62px;
-        padding: 10px 13px;
+    @media (max-width: 520px) {
+
+      .topbar {
+        min-height: 61px;
       }
 
-      .logo {
+      .brand-logo {
         width: 38px;
         height: 38px;
+
+        border-radius: 12px;
       }
 
-      .title {
-        font-size: 17px;
+      .brand-title {
+        font-size: 16px;
+      }
+
+      .connection {
+        font-size: 10px;
       }
 
       .messages {
-        padding: 14px 10px;
+        padding: 13px 10px;
+      }
+
+      .message-content {
+        max-width: 88%;
       }
 
       .bubble {
-        max-width: 86%;
+        padding: 10px 12px;
+
+        border-radius: 15px;
       }
 
-      .input-area {
-        padding:
-          9px
-          max(9px, env(safe-area-inset-right))
-          calc(9px + env(safe-area-inset-bottom))
-          max(9px, env(safe-area-inset-left));
-      }
-
-      .input-row {
-        display: grid;
-        grid-template-columns: 85px 1fr 64px;
-      }
-
-      #username {
-        width: 100%;
-      }
-
-      input {
-        padding: 11px 10px;
+      .message-text {
         font-size: 14px;
       }
 
-      button {
-        padding: 0 8px;
-        min-width: 0;
+      .bottom-bar {
+        padding-top: 8px;
       }
+
+      .message-input {
+        height: 46px;
+
+        padding: 0 12px;
+      }
+
+      .emoji-button {
+        width: 44px;
+        height: 46px;
+      }
+
+      .send-button {
+        height: 46px;
+
+        padding: 0 14px;
+      }
+
     }
+
+
+    /* =====================================================
+       VERY SMALL PHONES
+    ===================================================== */
+
+    @media (max-width: 370px) {
+
+      .brand-subtitle {
+        display: none;
+      }
+
+      .connection {
+        display: none;
+      }
+
+      .send-button {
+        width: 46px;
+
+        padding: 0;
+
+        font-size: 0;
+      }
+
+      .send-button::after {
+        content: "➤";
+
+        font-size: 17px;
+      }
+
+    }
+
   </style>
 </head>
 
+
 <body>
 
-  <main class="app">
 
-    <!-- HEADER -->
-    <header class="header">
+  <!-- =====================================================
+       LOGIN
+  ===================================================== -->
+
+  <div
+    class="login-screen"
+    id="loginScreen"
+  >
+
+    <div class="login-card">
+
+      <div class="login-logo">
+        💬
+      </div>
+
+      <h1>
+        Welcome to MyChat
+      </h1>
+
+      <p>
+        Choose a display name to join the conversation.
+      </p>
+
+      <input
+        class="name-input"
+        id="nameInput"
+        type="text"
+        maxlength="20"
+        autocomplete="nickname"
+        placeholder="Enter your name"
+      >
+
+      <button
+        class="login-button"
+        onclick="login()"
+      >
+        Login & Join
+      </button>
+
+      <div
+        class="login-error"
+        id="loginError"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       CHAT APP
+  ===================================================== -->
+
+  <main class="app" id="app">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
 
       <div class="brand">
 
-        <div class="logo">
+        <div class="brand-logo">
           💬
         </div>
 
-        <div>
-          <div class="title">
+        <div class="brand-text">
+
+          <div class="brand-title">
             MyChat
           </div>
 
-          <div class="subtitle">
+          <div class="brand-subtitle">
             Community chat
           </div>
+
         </div>
 
       </div>
 
-      <div class="status" id="status">
-        <span class="status-dot"></span>
-        <span id="statusText">Connecting...</span>
+
+      <div
+        class="connection"
+        id="connection"
+      >
+
+        <span class="connection-dot"></span>
+
+        <span id="connectionText">
+          Connecting...
+        </span>
+
       </div>
 
     </header>
 
 
     <!-- MESSAGES -->
+
     <section
       class="messages"
       id="messages"
     >
 
-      <div class="empty" id="empty">
+      <div
+        class="empty"
+        id="empty"
+      >
 
         <div>
+
           <div class="empty-icon">
             💬
           </div>
@@ -414,6 +972,7 @@
             No messages yet.<br>
             Start the conversation!
           </p>
+
         </div>
 
       </div>
@@ -421,36 +980,43 @@
     </section>
 
 
-    <!-- ERROR -->
+    <!-- EMOJI PICKER -->
+
     <div
-      class="error-box"
-      id="errorBox"
+      class="emoji-picker"
+      id="emojiPicker"
     ></div>
 
 
-    <!-- INPUT -->
-    <footer class="input-area">
+    <!-- BOTTOM -->
 
-      <div class="input-row">
+    <footer class="bottom-bar">
 
-        <input
-          id="username"
-          type="text"
-          placeholder="Name"
-          maxlength="20"
-          autocomplete="nickname"
-        >
+      <div class="composer">
 
         <input
+          class="message-input"
           id="messageInput"
           type="text"
-          placeholder="Type a message..."
           maxlength="500"
           autocomplete="off"
+          placeholder="Type a message..."
         >
 
         <button
+          class="emoji-button"
+          id="emojiButton"
+          type="button"
+          onclick="toggleEmojiPicker()"
+          aria-label="Emoji"
+        >
+          😊
+        </button>
+
+        <button
+          class="send-button"
           id="sendButton"
+          type="button"
           onclick="sendMessage()"
         >
           Send
@@ -465,29 +1031,57 @@
 
   <script>
 
-    // ==================================================
-    // YOUR RENDER SERVER
-    // ==================================================
+    /* =====================================================
+       SERVER
+    ===================================================== */
 
     const SERVER_URL =
-      "PASTE_YOUR_RENDER_URL_HERE".replace(/\/+$/, "");
+      "https://my-roblox-private-chat.onrender.com";
 
 
-    // ==================================================
-    // VARIABLES
-    // ==================================================
+    /* =====================================================
+       VARIABLES
+    ===================================================== */
+
+    let username = "";
 
     let lastMessageTime = 0;
 
     let loadingMessages = false;
 
-    // Prevent duplicate messages
-    const displayedMessages = new Set();
+    /*
+      This is the main duplicate protection.
+
+      Every displayed message gets a fingerprint.
+
+      Even if Render returns the exact same message
+      20 times, we only display it once.
+    */
+
+    const displayedMessages =
+      new Set();
 
 
-    // ==================================================
-    // ELEMENTS
-    // ==================================================
+    /*
+      Prevent old messages from being loaded again
+      when polling.
+    */
+
+    let newestServerTime = 0;
+
+
+    /* =====================================================
+       ELEMENTS
+    ===================================================== */
+
+    const loginScreen =
+      document.getElementById("loginScreen");
+
+    const nameInput =
+      document.getElementById("nameInput");
+
+    const loginError =
+      document.getElementById("loginError");
 
     const messagesElement =
       document.getElementById("messages");
@@ -495,17 +1089,11 @@
     const emptyElement =
       document.getElementById("empty");
 
-    const statusElement =
-      document.getElementById("status");
+    const connection =
+      document.getElementById("connection");
 
-    const statusText =
-      document.getElementById("statusText");
-
-    const errorBox =
-      document.getElementById("errorBox");
-
-    const usernameInput =
-      document.getElementById("username");
+    const connectionText =
+      document.getElementById("connectionText");
 
     const messageInput =
       document.getElementById("messageInput");
@@ -513,102 +1101,210 @@
     const sendButton =
       document.getElementById("sendButton");
 
+    const emojiPicker =
+      document.getElementById("emojiPicker");
 
-    // ==================================================
-    // USERNAME
-    // ==================================================
 
-    const savedName =
-      localStorage.getItem("mychat_username");
+    /* =====================================================
+       NAME COLORS
+    ===================================================== */
 
-    if (savedName) {
-      usernameInput.value = savedName;
+    const nameColors = [
+      "#ff6b8a",
+      "#ff9f43",
+      "#ffd166",
+      "#5ee1a2",
+      "#55c7ff",
+      "#7c8cff",
+      "#b084ff",
+      "#ff72d2",
+      "#58d5c9",
+      "#e989ff"
+    ];
+
+
+    /*
+      Same username gets the same color.
+
+      It looks random but stays consistent.
+    */
+
+    function getNameColor(name) {
+
+      let hash = 0;
+
+      for (
+        let i = 0;
+        i < name.length;
+        i++
+      ) {
+
+        hash =
+          name.charCodeAt(i) +
+          ((hash << 5) - hash);
+
+      }
+
+      const index =
+        Math.abs(hash) %
+        nameColors.length;
+
+      return nameColors[index];
+
     }
 
 
-    usernameInput.addEventListener("input", () => {
+    /* =====================================================
+       LOGIN
+    ===================================================== */
+
+    function login() {
+
+      const name =
+        nameInput.value.trim();
+
+
+      if (!name) {
+
+        loginError.textContent =
+          "Please enter a name.";
+
+        return;
+
+      }
+
+
+      if (name.length < 2) {
+
+        loginError.textContent =
+          "Name must be at least 2 characters.";
+
+        return;
+
+      }
+
+
+      username = name;
 
       localStorage.setItem(
         "mychat_username",
-        usernameInput.value.trim()
+        username
       );
 
-    });
+
+      loginScreen.style.display =
+        "none";
 
 
-    // ==================================================
-    // STATUS
-    // ==================================================
+      messageInput.focus();
 
-    function setStatus(type, text) {
 
-      statusElement.className =
-        "status " + type;
-
-      statusText.textContent = text;
+      startChat();
 
     }
 
 
-    // ==================================================
-    // ERROR
-    // ==================================================
+    /* =====================================================
+       LOAD SAVED LOGIN
+    ===================================================== */
 
-    function showError(message) {
+    const savedUsername =
+      localStorage.getItem(
+        "mychat_username"
+      );
 
-      errorBox.textContent = message;
 
-      errorBox.classList.add("show");
+    if (savedUsername) {
+
+      username =
+        savedUsername;
+
+      loginScreen.style.display =
+        "none";
+
+      startChat();
 
     }
 
 
-    function hideError() {
+    /* =====================================================
+       ENTER LOGIN
+    ===================================================== */
 
-      errorBox.textContent = "";
+    nameInput.addEventListener(
+      "keydown",
+      function(event) {
 
-      errorBox.classList.remove("show");
+        if (event.key === "Enter") {
+          login();
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       CONNECTION STATUS
+    ===================================================== */
+
+    function setConnection(
+      type,
+      text
+    ) {
+
+      connection.className =
+        "connection " + type;
+
+      connectionText.textContent =
+        text;
 
     }
 
 
-    // ==================================================
-    // MESSAGE ID
-    // ==================================================
+    /* =====================================================
+       MESSAGE FINGERPRINT
+    ===================================================== */
 
-    function getMessageId(message) {
+    function messageFingerprint(message) {
 
       /*
-        Your server doesn't provide a unique ID.
+        Your Render server currently doesn't give
+        every message a unique ID.
 
-        We create one using:
-        time + user + message + source
+        So we create a strong fingerprint.
+
+        Includes:
+        - timestamp
+        - username
+        - message
+        - source
+        - jobId
       */
 
       return [
-        message.time,
-        message.user,
-        message.msg,
-        message.source || ""
-      ].join("|");
+        String(message.time || ""),
+        String(message.user || ""),
+        String(message.msg || ""),
+        String(message.source || ""),
+        String(message.jobId || "")
+      ].join("|||");
 
     }
 
 
-    // ==================================================
-    // LOAD MESSAGES
-    // ==================================================
+    /* =====================================================
+       LOAD MESSAGES
+    ===================================================== */
 
     async function loadMessages() {
 
       /*
-        IMPORTANT:
+        VERY IMPORTANT:
 
-        Don't allow two /messages requests
-        to run at the same time.
+        Don't allow multiple polling requests
+        to overlap.
 
-        This fixes duplicate messages caused
-        by overlapping polling requests.
+        This stops a common source of duplicates.
       */
 
       if (loadingMessages) {
@@ -617,42 +1313,66 @@
 
       loadingMessages = true;
 
+
       try {
 
-        const response = await fetch(
-          SERVER_URL +
-          "/messages?since=" +
-          encodeURIComponent(lastMessageTime),
-          {
-            method: "GET",
-            cache: "no-store"
-          }
-        );
+        const response =
+          await fetch(
+            SERVER_URL +
+            "/messages?since=" +
+            encodeURIComponent(
+              lastMessageTime
+            ),
+            {
+              method: "GET",
+              cache: "no-store"
+            }
+          );
 
 
         if (!response.ok) {
 
           throw new Error(
-            "Server returned HTTP " +
+            "HTTP " +
             response.status
           );
 
         }
 
 
-        const newMessages =
+        const data =
           await response.json();
 
 
-        setStatus(
+        if (!Array.isArray(data)) {
+
+          throw new Error(
+            "Invalid server response"
+          );
+
+        }
+
+
+        setConnection(
           "connected",
           "Connected"
         );
 
-        hideError();
+
+        /*
+          Sort messages oldest → newest.
+
+          This keeps the chat ordered correctly.
+        */
+
+        data.sort(
+          (a, b) =>
+            Number(a.time || 0) -
+            Number(b.time || 0)
+        );
 
 
-        newMessages.forEach(
+        data.forEach(
           addMessage
         );
 
@@ -660,76 +1380,116 @@
       } catch (error) {
 
         console.error(
-          "Load messages error:",
+          "Message loading error:",
           error
         );
 
-        setStatus(
-          "error",
-          "Connection problem"
-        );
 
-        showError(
-          "Could not connect to the Render server. " +
-          "Check your Render URL and make sure the server is running."
+        setConnection(
+          "error",
+          "Connection error"
         );
 
       } finally {
 
-        loadingMessages = false;
+        loadingMessages =
+          false;
 
       }
 
     }
 
 
-    // ==================================================
-    // ADD MESSAGE
-    // ==================================================
+    /* =====================================================
+       ADD MESSAGE
+    ===================================================== */
 
     function addMessage(message) {
 
+      /*
+        Create fingerprint BEFORE rendering.
+      */
+
       const id =
-        getMessageId(message);
+        messageFingerprint(message);
 
 
-      // Already displayed?
-      if (displayedMessages.has(id)) {
+      /*
+        THE IMPORTANT FIX:
+
+        If we've already shown this exact message,
+        completely ignore it.
+
+        This protects against:
+        - repeated polling
+        - overlapping requests
+        - duplicate server entries
+        - immediate send + polling duplication
+      */
+
+      if (
+        displayedMessages.has(id)
+      ) {
+
         return;
+
       }
 
 
       displayedMessages.add(id);
 
 
-      // Hide empty message
+      /*
+        Update newest timestamp.
+
+        IMPORTANT:
+        We update this even for messages we display,
+        so future requests only ask for newer messages.
+      */
+
+      const messageTime =
+        Number(message.time || 0);
+
+
+      if (
+        messageTime >
+        lastMessageTime
+      ) {
+
+        lastMessageTime =
+          messageTime;
+
+      }
+
+
       emptyElement.style.display =
         "none";
 
+
+      /* MESSAGE */
 
       const wrapper =
         document.createElement("div");
 
 
-      const myName =
-        usernameInput.value.trim();
+      const isMine =
+        message.user === username;
 
 
-      if (
-        myName &&
-        message.user === myName
-      ) {
+      wrapper.className =
+        isMine
+          ? "message mine"
+          : "message";
 
-        wrapper.className =
-          "message mine";
 
-      } else {
+      const content =
+        document.createElement("div");
 
-        wrapper.className =
-          "message";
+      content.className =
+        "message-content";
 
-      }
 
+      /* BUBBLE */
 
       const bubble =
         document.createElement("div");
@@ -738,105 +1498,172 @@
         "bubble";
 
 
-      // USER
+      /* USERNAME */
+
       const user =
         document.createElement("div");
 
       user.className =
-        "user";
+        "username";
 
       user.textContent =
-        message.user || "Unknown";
+        message.user ||
+        "Unknown";
+
+      user.style.color =
+        getNameColor(
+          message.user ||
+          "Unknown"
+        );
 
 
-      // TEXT
+      /* TEXT */
+
       const text =
         document.createElement("div");
 
       text.className =
-        "text";
+        "message-text";
 
-      // textContent prevents HTML injection
+      /*
+        textContent is intentional.
+
+        It prevents someone from putting HTML
+        or scripts inside a message.
+      */
+
       text.textContent =
         message.msg || "";
 
 
-      // META
+      bubble.appendChild(
+        user
+      );
+
+      bubble.appendChild(
+        text
+      );
+
+
+      /* TIME BELOW BUBBLE */
+
       const meta =
         document.createElement("div");
 
       meta.className =
-        "meta";
+        "message-meta";
 
 
       const time =
         document.createElement("span");
 
-      time.textContent =
+
+      const date =
         new Date(
           message.time
-        ).toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit"
-        });
+        );
 
 
-      const source =
-        document.createElement("span");
-
-      source.className =
-        "source";
-
-      source.textContent =
-        message.source
-          ? "• " + message.source
-          : "";
-
-
-      meta.appendChild(time);
-
-      if (message.source) {
-        meta.appendChild(source);
-      }
+      time.textContent =
+        isNaN(date.getTime())
+          ? ""
+          : date.toLocaleTimeString(
+              [],
+              {
+                hour: "2-digit",
+                minute: "2-digit"
+              }
+            );
 
 
-      bubble.appendChild(user);
-
-      bubble.appendChild(text);
-
-      bubble.appendChild(meta);
-
-      wrapper.appendChild(bubble);
-
-      messagesElement.appendChild(wrapper);
+      meta.appendChild(
+        time
+      );
 
 
-      // Update timestamp
+      /*
+        Source is only shown when it isn't
+        the website.
+
+        This helps distinguish Roblox/Discord
+        messages without making the UI messy.
+      */
+
       if (
-        Number(message.time) >
-        Number(lastMessageTime)
+        message.source &&
+        message.source !== "website"
       ) {
 
-        lastMessageTime =
-          Number(message.time);
+        const source =
+          document.createElement("span");
+
+        source.textContent =
+          "• " +
+          message.source;
+
+        meta.appendChild(
+          source
+        );
 
       }
 
 
-      messagesElement.scrollTop =
-        messagesElement.scrollHeight;
+      content.appendChild(
+        bubble
+      );
+
+      content.appendChild(
+        meta
+      );
+
+
+      wrapper.appendChild(
+        content
+      );
+
+
+      messagesElement.appendChild(
+        wrapper
+      );
+
+
+      /*
+        Scroll only when the user is already
+        near the bottom.
+
+        This prevents jumping while reading
+        older messages.
+      */
+
+      const distanceFromBottom =
+        messagesElement.scrollHeight -
+        messagesElement.scrollTop -
+        messagesElement.clientHeight;
+
+
+      if (
+        distanceFromBottom < 300
+      ) {
+
+        requestAnimationFrame(
+          () => {
+
+            messagesElement.scrollTop =
+              messagesElement.scrollHeight;
+
+          }
+        );
+
+      }
 
     }
 
 
-    // ==================================================
-    // SEND MESSAGE
-    // ==================================================
+    /* =====================================================
+       SEND
+    ===================================================== */
 
     async function sendMessage() {
-
-      const username =
-        usernameInput.value.trim();
 
       const msg =
         messageInput.value.trim();
@@ -844,11 +1671,8 @@
 
       if (!username) {
 
-        showError(
-          "Please enter your name."
-        );
-
-        usernameInput.focus();
+        loginScreen.style.display =
+          "flex";
 
         return;
 
@@ -860,19 +1684,8 @@
       }
 
 
-      localStorage.setItem(
-        "mychat_username",
-        username
-      );
-
-
       sendButton.disabled =
         true;
-
-      sendButton.textContent =
-        "...";
-
-      hideError();
 
 
       try {
@@ -890,13 +1703,17 @@
 
               body: JSON.stringify({
 
-                user: username,
+                user:
+                  username,
 
-                msg: msg,
+                msg:
+                  msg,
 
-                source: "website",
+                source:
+                  "website",
 
-                private: false
+                private:
+                  false
 
               })
 
@@ -906,14 +1723,14 @@
 
         if (!response.ok) {
 
-          const errorText =
+          const error =
             await response.text();
 
           throw new Error(
             "HTTP " +
             response.status +
-            ": " +
-            errorText
+            " " +
+            error
           );
 
         }
@@ -924,13 +1741,18 @@
 
 
         /*
-          Immediately display the message
-          returned by Render.
+          Render returns the newly-created message.
 
-          This makes sending feel instant.
+          Add it immediately.
+
+          The fingerprint prevents the next polling
+          request from displaying it again.
         */
 
-        if (result.message) {
+        if (
+          result &&
+          result.message
+        ) {
 
           addMessage(
             result.message
@@ -948,15 +1770,19 @@
       } catch (error) {
 
         console.error(
-          "Send message error:",
+          "Send error:",
           error
         );
 
 
-        showError(
-          "Message could not be sent. " +
-          "Check that your Render server is running " +
-          "and that SERVER_URL is correct."
+        setConnection(
+          "error",
+          "Send failed"
+        );
+
+        alert(
+          "Message could not be sent.\n\n" +
+          "Check that your Render server is running."
         );
 
       } finally {
@@ -964,17 +1790,14 @@
         sendButton.disabled =
           false;
 
-        sendButton.textContent =
-          "Send";
-
       }
 
     }
 
 
-    // ==================================================
-    // ENTER TO SEND
-    // ==================================================
+    /* =====================================================
+       ENTER SEND
+    ===================================================== */
 
     messageInput.addEventListener(
       "keydown",
@@ -995,38 +1818,150 @@
     );
 
 
-    // ==================================================
-    // START
-    // ==================================================
+    /* =====================================================
+       EMOJIS
+    ===================================================== */
 
-    if (
-      SERVER_URL ===
-      "https://my-roblox-private-chat.onrender.com"
+    const emojis = [
+      "😀","😃","😄","😁","😆","😅","😂","🤣",
+      "😊","😇","🙂","🙃","😉","😌","😍","🥰",
+      "😘","😎","🤩","🥳","😜","🤪","🤔","🫡",
+      "😴","😭","😡","🤯","😱","🤗","❤️","🧡",
+      "💛","💚","💙","💜","🖤","🤍","💯","🔥",
+      "👍","👎","👏","🙌","🙏","💪","👀","✨",
+      "🎉","🎊","🚀","⭐","💀","😈","🤝","❤️‍🔥"
+    ];
+
+
+    emojis.forEach(
+      emoji => {
+
+        const button =
+          document.createElement(
+            "button"
+          );
+
+        button.className =
+          "emoji";
+
+        button.type =
+          "button";
+
+        button.textContent =
+          emoji;
+
+
+        button.onclick =
+          () => {
+
+            insertEmoji(
+              emoji
+            );
+
+          };
+
+
+        emojiPicker.appendChild(
+          button
+        );
+
+      }
+    );
+
+
+    function toggleEmojiPicker() {
+
+      emojiPicker.classList.toggle(
+        "open"
+      );
+
+    }
+
+
+    function insertEmoji(
+      emoji
     ) {
 
-      setStatus(
-        "error",
-        "Server URL missing"
+      const start =
+        messageInput.selectionStart;
+
+      const end =
+        messageInput.selectionEnd;
+
+      const value =
+        messageInput.value;
+
+
+      messageInput.value =
+        value.substring(
+          0,
+          start
+        ) +
+        emoji +
+        value.substring(
+          end
+        );
+
+
+      messageInput.focus();
+
+
+      const position =
+        start +
+        emoji.length;
+
+
+      messageInput.setSelectionRange(
+        position,
+        position
       );
 
-      showError(
-        "Put your Render URL into SERVER_URL in index.html."
-      );
+    }
 
-    } else {
+
+    /* Close emoji picker when clicking outside */
+
+    document.addEventListener(
+      "click",
+      function(event) {
+
+        if (
+          !emojiPicker.contains(
+            event.target
+          ) &&
+          event.target.id !==
+            "emojiButton"
+        ) {
+
+          emojiPicker.classList.remove(
+            "open"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       START CHAT
+    ===================================================== */
+
+    function startChat() {
 
       loadMessages();
+
 
       /*
         Poll every 2 seconds.
 
-        The loadingMessages lock prevents
-        overlapping requests.
+        The lock + fingerprint system prevents
+        duplicates.
       */
 
       setInterval(
         loadMessages,
-        2000
+        1000
       );
 
     }
