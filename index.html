@@ -1,3 +1,7 @@
+/*=======
+localStorage.removeItem("mychat_username");
+=====*/ 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +14,7 @@
 
   <meta name="theme-color" content="#10151d">
 
-  <title>MyChat</title>
+  <title> NOTHING_PANEL_Chat</title>
 
   <style>
 
@@ -329,7 +333,7 @@
       display: flex;
       align-items: center;
 
-      gap: 7px;
+      gap: 9px;
 
       color: #8f9aaa;
 
@@ -379,7 +383,7 @@
       overflow-y: auto;
 
       padding:
-        20px
+        15px
         max(15px, calc((100vw - 1000px) / 2));
 
       scroll-behavior: smooth;
@@ -454,7 +458,7 @@
       border-radius: 17px;
 
       background:
-        rgba(25, 33, 44, 0.92);
+        rgba(20, 95, 105, 0.78);
 
       border:
         1px solid rgba(255,255,255,0.07);
@@ -467,12 +471,7 @@
 
     .mine .bubble {
       background:
-        linear-gradient(
-          135deg,
-          #3977ed,
-          #285fc8
-        );
-
+        
       border-color:
         rgba(255,255,255,0.08);
     }
@@ -493,9 +492,13 @@
       white-space: pre-wrap;
     }
 
-    /*
-      Time is OUTSIDE the bubble.
-    */
+    
+      background: linear-gradient(
+  135deg,
+  #176f82,
+  #248f88
+);
+    
 
     .message-meta {
       margin-top: 4px;
@@ -839,7 +842,7 @@
       }
 
       .send-button::after {
-        content: "➤";
+        content: "➡️";
 
         font-size: 17px;
       }
@@ -865,16 +868,15 @@
     <div class="login-card">
 
       <div class="login-logo">
-        💬
+        😼
       </div>
 
       <h1>
-        Welcome to MyChat
+        welcome to Nothing Panel chat!! ;)
       </h1>
 
       <p>
-        Choose a display name to join the conversation.
-      </p>
+        What's your roblox Name???
 
       <input
         class="name-input"
@@ -889,7 +891,7 @@
         class="login-button"
         onclick="login()"
       >
-        Login & Join
+        Log in
       </button>
 
       <div
@@ -965,7 +967,7 @@
         <div>
 
           <div class="empty-icon">
-            💬
+            🔗
           </div>
 
           <p>
@@ -1010,7 +1012,7 @@
           onclick="toggleEmojiPicker()"
           aria-label="Emoji"
         >
-          😊
+          😄
         </button>
 
         <button
