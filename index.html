@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  >
 
   <title>MyChat</title>
 
@@ -11,321 +14,1022 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
+    }
+
+    :root {
+      --bg: #0b0f14;
+      --panel: #121821;
+      --panel2: #18212c;
+      --border: #26313d;
+      --text: #f5f7fa;
+      --muted: #8d9aaa;
+      --blue: #4d8dff;
+      --blue2: #2868d8;
+      --danger: #ff6b6b;
+      --success: #55d98b;
     }
 
     body {
-      background: #111;
-      height: 100vh;
-      color: white;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
     }
+
+    /* APP */
 
     .app {
-      max-width: 600px;
+      width: 100%;
       height: 100vh;
-      margin: auto;
-      background: #181818;
+      height: 100dvh;
       display: flex;
       flex-direction: column;
+      background: var(--panel);
     }
+
+    /* HEADER */
 
     .header {
-      padding: 18px;
-      background: #222;
-      border-bottom: 1px solid #333;
+      min-height: 68px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      background: #10161e;
+      border-bottom: 1px solid var(--border);
     }
 
-    .header h1 {
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
       font-size: 21px;
     }
 
-    .status {
-      font-size: 12px;
-      color: #8aff8a;
-      margin-top: 4px;
+    .title {
+      font-size: 19px;
+      font-weight: 700;
     }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--muted);
+    }
+
+    .status.connected {
+      color: var(--success);
+    }
+
+    .status.connected .status-dot {
+      background: var(--success);
+    }
+
+    .status.error {
+      color: var(--danger);
+    }
+
+    .status.error .status-dot {
+      background: var(--danger);
+    }
+
+    /* MESSAGES */
 
     .messages {
       flex: 1;
       overflow-y: auto;
-      padding: 15px;
+      padding: 20px;
+      scroll-behavior: smooth;
+    }
+
+    .empty {
+      height: 100%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .empty-icon {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    .empty p {
+      font-size: 14px;
     }
 
     .message {
-      margin-bottom: 12px;
-      padding: 10px 13px;
-      background: #292929;
-      border-radius: 12px;
-      width: fit-content;
-      max-width: 85%;
+      display: flex;
+      margin-bottom: 13px;
     }
 
-    .message .user {
+    .bubble {
+      max-width: min(75%, 600px);
+      padding: 10px 13px;
+      border-radius: 15px;
+      background: var(--panel2);
+      border: 1px solid var(--border);
+    }
+
+    .message.mine {
+      justify-content: flex-end;
+    }
+
+    .message.mine .bubble {
+      background: var(--blue2);
+      border-color: var(--blue2);
+    }
+
+    .user {
       font-size: 12px;
-      font-weight: bold;
-      color: #aaa;
+      font-weight: 700;
+      color: #8db8ff;
       margin-bottom: 4px;
     }
 
-    .message .text {
-      font-size: 15px;
-      word-wrap: break-word;
+    .mine .user {
+      color: #dce8ff;
     }
 
-    .message .time {
-      font-size: 10px;
-      color: #777;
-      margin-top: 5px;
+    .text {
+      font-size: 15px;
+      line-height: 1.4;
+      word-break: break-word;
+      white-space: pre-wrap;
     }
+
+    .meta {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+      margin-top: 5px;
+      color: #8390a0;
+      font-size: 10px;
+    }
+
+    .mine .meta {
+      color: #c8dcff;
+    }
+
+    .source {
+      opacity: .8;
+    }
+
+    /* ERROR */
+
+    .error-box {
+      display: none;
+      padding: 10px 15px;
+      background: #35191d;
+      border-top: 1px solid #6d2a31;
+      color: #ffb4b4;
+      font-size: 12px;
+    }
+
+    .error-box.show {
+      display: block;
+    }
+
+    /* INPUT */
 
     .input-area {
-      display: flex;
-      gap: 8px;
       padding: 12px;
-      background: #222;
-      border-top: 1px solid #333;
+      background: #10161e;
+      border-top: 1px solid var(--border);
     }
 
-    #username {
-      width: 90px;
+    .input-row {
+      width: 100%;
+      display: flex;
+      gap: 8px;
     }
 
     input {
-      border: none;
+      border: 1px solid var(--border);
       outline: none;
-      background: #333;
-      color: white;
-      padding: 12px;
-      border-radius: 20px;
+      background: #1a232e;
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 13px;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border-color: var(--blue);
+    }
+
+    #username {
+      width: 125px;
     }
 
     #messageInput {
       flex: 1;
+      min-width: 0;
     }
 
     button {
-      border: none;
-      background: #4f7cff;
+      border: 0;
+      background: var(--blue);
       color: white;
-      padding: 0 18px;
-      border-radius: 20px;
-      font-weight: bold;
+      padding: 0 20px;
+      border-radius: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      min-width: 75px;
     }
 
-    button:active {
-      transform: scale(0.96);
+    button:hover {
+      background: #6099ff;
+    }
+
+    button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
+    /* DESKTOP */
+
+    @media (min-width: 700px) {
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 25px;
+      }
+
+      .app {
+        max-width: 900px;
+        height: min(900px, 94vh);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+      }
+
+      .messages {
+        padding: 25px;
+      }
+
+      .input-area {
+        padding: 15px 20px;
+      }
+    }
+
+    /* PHONE */
+
+    @media (max-width: 500px) {
+
+      .header {
+        min-height: 62px;
+        padding: 10px 13px;
+      }
+
+      .logo {
+        width: 38px;
+        height: 38px;
+      }
+
+      .title {
+        font-size: 17px;
+      }
+
+      .messages {
+        padding: 14px 10px;
+      }
+
+      .bubble {
+        max-width: 86%;
+      }
+
+      .input-area {
+        padding:
+          9px
+          max(9px, env(safe-area-inset-right))
+          calc(9px + env(safe-area-inset-bottom))
+          max(9px, env(safe-area-inset-left));
+      }
+
+      .input-row {
+        display: grid;
+        grid-template-columns: 85px 1fr 64px;
+      }
+
+      #username {
+        width: 100%;
+      }
+
+      input {
+        padding: 11px 10px;
+        font-size: 14px;
+      }
+
+      button {
+        padding: 0 8px;
+        min-width: 0;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="app">
+  <main class="app">
 
-    <div class="header">
-      <h1>💬 MyChat</h1>
-      <div class="status" id="status">Connecting...</div>
-    </div>
+    <!-- HEADER -->
+    <header class="header">
 
-    <div class="messages" id="messages"></div>
+      <div class="brand">
 
-    <div class="input-area">
+        <div class="logo">
+          💬
+        </div>
 
-      <input
-        id="username"
-        type="text"
-        placeholder="Name"
-        maxlength="20"
-      >
+        <div>
+          <div class="title">
+            MyChat
+          </div>
 
-      <input
-        id="messageInput"
-        type="text"
-        placeholder="Message..."
-        maxlength="500"
-      >
+          <div class="subtitle">
+            Community chat
+          </div>
+        </div>
 
-      <button onclick="sendMessage()">Send</button>
+      </div>
 
-    </div>
+      <div class="status" id="status">
+        <span class="status-dot"></span>
+        <span id="statusText">Connecting...</span>
+      </div>
 
-  </div>
+    </header>
+
+
+    <!-- MESSAGES -->
+    <section
+      class="messages"
+      id="messages"
+    >
+
+      <div class="empty" id="empty">
+
+        <div>
+          <div class="empty-icon">
+            💬
+          </div>
+
+          <p>
+            No messages yet.<br>
+            Start the conversation!
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ERROR -->
+    <div
+      class="error-box"
+      id="errorBox"
+    ></div>
+
+
+    <!-- INPUT -->
+    <footer class="input-area">
+
+      <div class="input-row">
+
+        <input
+          id="username"
+          type="text"
+          placeholder="Name"
+          maxlength="20"
+          autocomplete="nickname"
+        >
+
+        <input
+          id="messageInput"
+          type="text"
+          placeholder="Type a message..."
+          maxlength="500"
+          autocomplete="off"
+        >
+
+        <button
+          id="sendButton"
+          onclick="sendMessage()"
+        >
+          Send
+        </button>
+
+      </div>
+
+    </footer>
+
+  </main>
+
 
   <script>
 
-    // ==========================================
+    // ==================================================
     // YOUR RENDER SERVER
-    // ==========================================
+    // ==================================================
 
-    const SERVER_URL = "https://my-roblox-private-chat.onrender.com";
+    const SERVER_URL =
+      "PASTE_YOUR_RENDER_URL_HERE".replace(/\/+$/, "");
 
 
-    // ==========================================
+    // ==================================================
     // VARIABLES
-    // ==========================================
+    // ==================================================
 
     let lastMessageTime = 0;
 
+    let loadingMessages = false;
 
-    // ==========================================
+    // Prevent duplicate messages
+    const displayedMessages = new Set();
+
+
+    // ==================================================
+    // ELEMENTS
+    // ==================================================
+
+    const messagesElement =
+      document.getElementById("messages");
+
+    const emptyElement =
+      document.getElementById("empty");
+
+    const statusElement =
+      document.getElementById("status");
+
+    const statusText =
+      document.getElementById("statusText");
+
+    const errorBox =
+      document.getElementById("errorBox");
+
+    const usernameInput =
+      document.getElementById("username");
+
+    const messageInput =
+      document.getElementById("messageInput");
+
+    const sendButton =
+      document.getElementById("sendButton");
+
+
+    // ==================================================
+    // USERNAME
+    // ==================================================
+
+    const savedName =
+      localStorage.getItem("mychat_username");
+
+    if (savedName) {
+      usernameInput.value = savedName;
+    }
+
+
+    usernameInput.addEventListener("input", () => {
+
+      localStorage.setItem(
+        "mychat_username",
+        usernameInput.value.trim()
+      );
+
+    });
+
+
+    // ==================================================
+    // STATUS
+    // ==================================================
+
+    function setStatus(type, text) {
+
+      statusElement.className =
+        "status " + type;
+
+      statusText.textContent = text;
+
+    }
+
+
+    // ==================================================
+    // ERROR
+    // ==================================================
+
+    function showError(message) {
+
+      errorBox.textContent = message;
+
+      errorBox.classList.add("show");
+
+    }
+
+
+    function hideError() {
+
+      errorBox.textContent = "";
+
+      errorBox.classList.remove("show");
+
+    }
+
+
+    // ==================================================
+    // MESSAGE ID
+    // ==================================================
+
+    function getMessageId(message) {
+
+      /*
+        Your server doesn't provide a unique ID.
+
+        We create one using:
+        time + user + message + source
+      */
+
+      return [
+        message.time,
+        message.user,
+        message.msg,
+        message.source || ""
+      ].join("|");
+
+    }
+
+
+    // ==================================================
     // LOAD MESSAGES
-    // ==========================================
+    // ==================================================
 
     async function loadMessages() {
+
+      /*
+        IMPORTANT:
+
+        Don't allow two /messages requests
+        to run at the same time.
+
+        This fixes duplicate messages caused
+        by overlapping polling requests.
+      */
+
+      if (loadingMessages) {
+        return;
+      }
+
+      loadingMessages = true;
 
       try {
 
         const response = await fetch(
-          SERVER_URL + "/messages?since=" + lastMessageTime
+          SERVER_URL +
+          "/messages?since=" +
+          encodeURIComponent(lastMessageTime),
+          {
+            method: "GET",
+            cache: "no-store"
+          }
         );
 
+
         if (!response.ok) {
-          throw new Error("Server error");
+
+          throw new Error(
+            "Server returned HTTP " +
+            response.status
+          );
+
         }
 
-        const newMessages = await response.json();
 
-        document.getElementById("status").textContent =
-          "● Connected";
+        const newMessages =
+          await response.json();
 
-        newMessages.forEach(addMessage);
+
+        setStatus(
+          "connected",
+          "Connected"
+        );
+
+        hideError();
+
+
+        newMessages.forEach(
+          addMessage
+        );
+
 
       } catch (error) {
 
-        console.log(error);
+        console.error(
+          "Load messages error:",
+          error
+        );
 
-        document.getElementById("status").textContent =
-          "● Disconnected";
+        setStatus(
+          "error",
+          "Connection problem"
+        );
+
+        showError(
+          "Could not connect to the Render server. " +
+          "Check your Render URL and make sure the server is running."
+        );
+
+      } finally {
+
+        loadingMessages = false;
 
       }
 
     }
 
 
-    // ==========================================
-    // DISPLAY MESSAGE
-    // ==========================================
+    // ==================================================
+    // ADD MESSAGE
+    // ==================================================
 
     function addMessage(message) {
 
-      const container =
-        document.getElementById("messages");
+      const id =
+        getMessageId(message);
 
-      const div = document.createElement("div");
 
-      div.className = "message";
+      // Already displayed?
+      if (displayedMessages.has(id)) {
+        return;
+      }
 
-      const user = document.createElement("div");
-      user.className = "user";
-      user.textContent = message.user;
 
-      const text = document.createElement("div");
-      text.className = "text";
-      text.textContent = message.msg;
+      displayedMessages.add(id);
 
-      const time = document.createElement("div");
-      time.className = "time";
+
+      // Hide empty message
+      emptyElement.style.display =
+        "none";
+
+
+      const wrapper =
+        document.createElement("div");
+
+
+      const myName =
+        usernameInput.value.trim();
+
+
+      if (
+        myName &&
+        message.user === myName
+      ) {
+
+        wrapper.className =
+          "message mine";
+
+      } else {
+
+        wrapper.className =
+          "message";
+
+      }
+
+
+      const bubble =
+        document.createElement("div");
+
+      bubble.className =
+        "bubble";
+
+
+      // USER
+      const user =
+        document.createElement("div");
+
+      user.className =
+        "user";
+
+      user.textContent =
+        message.user || "Unknown";
+
+
+      // TEXT
+      const text =
+        document.createElement("div");
+
+      text.className =
+        "text";
+
+      // textContent prevents HTML injection
+      text.textContent =
+        message.msg || "";
+
+
+      // META
+      const meta =
+        document.createElement("div");
+
+      meta.className =
+        "meta";
+
+
+      const time =
+        document.createElement("span");
 
       time.textContent =
-        new Date(message.time).toLocaleTimeString();
+        new Date(
+          message.time
+        ).toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit"
+        });
 
-      div.appendChild(user);
-      div.appendChild(text);
-      div.appendChild(time);
 
-      container.appendChild(div);
+      const source =
+        document.createElement("span");
 
-      lastMessageTime =
-        Math.max(lastMessageTime, message.time);
+      source.className =
+        "source";
 
-      container.scrollTop =
-        container.scrollHeight;
+      source.textContent =
+        message.source
+          ? "• " + message.source
+          : "";
+
+
+      meta.appendChild(time);
+
+      if (message.source) {
+        meta.appendChild(source);
+      }
+
+
+      bubble.appendChild(user);
+
+      bubble.appendChild(text);
+
+      bubble.appendChild(meta);
+
+      wrapper.appendChild(bubble);
+
+      messagesElement.appendChild(wrapper);
+
+
+      // Update timestamp
+      if (
+        Number(message.time) >
+        Number(lastMessageTime)
+      ) {
+
+        lastMessageTime =
+          Number(message.time);
+
+      }
+
+
+      messagesElement.scrollTop =
+        messagesElement.scrollHeight;
+
     }
 
 
-    // ==========================================
+    // ==================================================
     // SEND MESSAGE
-    // ==========================================
+    // ==================================================
 
     async function sendMessage() {
 
       const username =
-        document.getElementById("username").value.trim();
+        usernameInput.value.trim();
 
-      const input =
-        document.getElementById("messageInput");
+      const msg =
+        messageInput.value.trim();
 
-      const msg = input.value.trim();
 
       if (!username) {
-        alert("Enter your name first.");
+
+        showError(
+          "Please enter your name."
+        );
+
+        usernameInput.focus();
+
         return;
+
       }
+
 
       if (!msg) {
         return;
       }
 
+
+      localStorage.setItem(
+        "mychat_username",
+        username
+      );
+
+
+      sendButton.disabled =
+        true;
+
+      sendButton.textContent =
+        "...";
+
+      hideError();
+
+
       try {
 
-        const response = await fetch(
-          SERVER_URL + "/send",
-          {
-            method: "POST",
+        const response =
+          await fetch(
+            SERVER_URL + "/send",
+            {
+              method: "POST",
 
-            headers: {
-              "Content-Type": "application/json"
-            },
+              headers: {
+                "Content-Type":
+                  "application/json"
+              },
 
-            body: JSON.stringify({
-              user: username,
-              msg: msg,
-              source: "website",
-              private: false
-            })
-          }
-        );
+              body: JSON.stringify({
+
+                user: username,
+
+                msg: msg,
+
+                source: "website",
+
+                private: false
+
+              })
+
+            }
+          );
+
 
         if (!response.ok) {
-          throw new Error("Message failed");
+
+          const errorText =
+            await response.text();
+
+          throw new Error(
+            "HTTP " +
+            response.status +
+            ": " +
+            errorText
+          );
+
         }
 
-        input.value = "";
 
-        await loadMessages();
+        const result =
+          await response.json();
+
+
+        /*
+          Immediately display the message
+          returned by Render.
+
+          This makes sending feel instant.
+        */
+
+        if (result.message) {
+
+          addMessage(
+            result.message
+          );
+
+        }
+
+
+        messageInput.value =
+          "";
+
+        messageInput.focus();
+
 
       } catch (error) {
 
-        alert("Could not send message.");
+        console.error(
+          "Send message error:",
+          error
+        );
 
-        console.log(error);
+
+        showError(
+          "Message could not be sent. " +
+          "Check that your Render server is running " +
+          "and that SERVER_URL is correct."
+        );
+
+      } finally {
+
+        sendButton.disabled =
+          false;
+
+        sendButton.textContent =
+          "Send";
+
       }
 
     }
 
 
-    // ==========================================
-    // ENTER KEY
-    // ==========================================
+    // ==================================================
+    // ENTER TO SEND
+    // ==================================================
 
-    document
-      .getElementById("messageInput")
-      .addEventListener("keydown", function(event) {
+    messageInput.addEventListener(
+      "keydown",
+      function(event) {
 
-        if (event.key === "Enter") {
+        if (
+          event.key === "Enter" &&
+          !event.shiftKey
+        ) {
+
+          event.preventDefault();
+
           sendMessage();
+
         }
 
-      });
+      }
+    );
 
 
-    // ==========================================
-    // CHECK SERVER EVERY 1 SECOND
-    // ==========================================
+    // ==================================================
+    // START
+    // ==================================================
 
-    loadMessages();
+    if (
+      SERVER_URL ===
+      "https://my-roblox-private-chat.onrender.com"
+    ) {
 
-    setInterval(loadMessages, 1000);
+      setStatus(
+        "error",
+        "Server URL missing"
+      );
+
+      showError(
+        "Put your Render URL into SERVER_URL in index.html."
+      );
+
+    } else {
+
+      loadMessages();
+
+      /*
+        Poll every 2 seconds.
+
+        The loadingMessages lock prevents
+        overlapping requests.
+      */
+
+      setInterval(
+        loadMessages,
+        2000
+      );
+
+    }
 
   </script>
 
