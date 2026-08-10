@@ -1,21 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
 
-
-
-<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8"><meta
-name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
 
-«»
+  <meta charset="UTF-8">
 
-  <meta name="theme-color" content="#10151d">  <title>NOTHING_PANEL_Chat</title>  <style>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#10151d"
+  >
+
+  <title>NOTHING_PANEL_Chat</title>
+
+
+  <style>
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
 
     html,
     body {
@@ -24,7 +34,10 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       overflow: hidden;
     }
 
+
     body {
+      position: relative;
+
       font-family:
         Inter,
         system-ui,
@@ -34,20 +47,19 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         sans-serif;
 
       color: #fff;
-      background: #080b10;
+
+      background-color: #080b10;
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
     }
 
 
     /* =====================================================
-       BACKGROUND
-    ===================================================== */
-
-    
-
-
-    /* =====================================================
        LOGIN
-    ============================================= */
+    ===================================================== */
 
     .login-screen {
       position: fixed;
@@ -63,6 +75,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       z-index: 100;
     }
+
 
     .login-card {
       width: min(420px, 100%);
@@ -85,6 +98,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       text-align: center;
     }
+
 
     .login-logo {
       width: 72px;
@@ -110,10 +124,12 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         0 12px 35px rgba(60,120,255,0.3);
     }
 
+
     .login-card h1 {
       font-size: 27px;
       margin-bottom: 8px;
     }
+
 
     .login-card p {
       color: #9da8b7;
@@ -123,6 +139,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       margin-bottom: 25px;
     }
+
 
     .name-input {
       width: 100%;
@@ -143,12 +160,14 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       font-size: 15px;
     }
 
+
     .name-input:focus {
       border-color: #568cff;
 
       box-shadow:
         0 0 0 3px rgba(86,140,255,0.12);
     }
+
 
     .login-button {
       width: 100%;
@@ -178,9 +197,11 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       transition: 0.2s;
     }
 
+
     .login-button:active {
       transform: scale(0.98);
     }
+
 
     .login-error {
       min-height: 18px;
@@ -229,13 +250,13 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       gap: 15px;
 
-      background: rgba(8, 12, 18, 0.55);
+      background:
+        rgba(8, 12, 18, 0.55);
 
       border-bottom:
         1px solid rgba(255,255,255,0.08);
-
-      
     }
+
 
     .brand {
       display: flex;
@@ -245,6 +266,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       min-width: 0;
     }
+
 
     .brand-logo {
       width: 43px;
@@ -262,14 +284,17 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       font-size: 24px;
     }
 
+
     .brand-text {
       min-width: 0;
     }
+
 
     .brand-title {
       font-size: 18px;
       font-weight: 750;
     }
+
 
     .brand-subtitle {
       margin-top: 2px;
@@ -278,6 +303,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       font-size: 11px;
     }
+
 
     .connection {
       display: flex;
@@ -292,6 +318,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       white-space: nowrap;
     }
 
+
     .connection-dot {
       width: 8px;
       height: 8px;
@@ -301,9 +328,11 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       background: #858c95;
     }
 
+
     .connection.connected {
       color: #62dc91;
     }
+
 
     .connection.connected .connection-dot {
       background: #62dc91;
@@ -312,9 +341,11 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         0 0 10px rgba(98,220,145,0.7);
     }
 
+
     .connection.error {
       color: #ff7777;
     }
+
 
     .connection.error .connection-dot {
       background: #ff7777;
@@ -341,9 +372,11 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       overscroll-behavior: contain;
     }
 
+
     .messages::-webkit-scrollbar {
       width: 6px;
     }
+
 
     .messages::-webkit-scrollbar-thumb {
       background:
@@ -370,11 +403,13 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       color: #8d98a7;
     }
 
+
     .empty-icon {
       font-size: 45px;
 
       margin-bottom: 10px;
     }
+
 
     .empty p {
       font-size: 14px;
@@ -395,13 +430,16 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       margin-bottom: 16px;
     }
 
+
     .message.mine {
       justify-content: flex-end;
     }
 
+
     .message-content {
       max-width: min(75%, 650px);
     }
+
 
     .bubble {
       padding: 11px 14px;
@@ -418,9 +456,8 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         0 5px 20px rgba(0,0,0,0.12);
 
       word-break: break-word;
-
-      
     }
+
 
     .mine .bubble {
       background:
@@ -434,6 +471,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         rgba(255,255,255,0.08);
     }
 
+
     .username {
       margin-bottom: 4px;
 
@@ -442,6 +480,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       font-weight: 750;
     }
 
+
     .message-text {
       font-size: 15px;
 
@@ -449,6 +488,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       white-space: pre-wrap;
     }
+
 
     .message-meta {
       margin-top: 4px;
@@ -465,6 +505,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       font-size: 10px;
     }
+
 
     .mine .message-meta {
       justify-content: flex-end;
@@ -489,9 +530,8 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       border-top:
         1px solid rgba(255,255,255,0.08);
-
-      
     }
+
 
     .composer {
       width: 100%;
@@ -506,6 +546,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       gap: 8px;
     }
+
 
     .message-input {
       flex: 1;
@@ -531,12 +572,14 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       font-size: 14px;
     }
 
+
     .message-input:focus {
       border-color: #4e83ef;
 
       box-shadow:
         0 0 0 3px rgba(78,131,239,0.1);
     }
+
 
     .emoji-button {
       width: 48px;
@@ -558,6 +601,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       cursor: pointer;
     }
+
 
     .send-button {
       height: 48px;
@@ -583,6 +627,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       cursor: pointer;
     }
+
 
     .send-button:disabled {
       opacity: 0.55;
@@ -629,9 +674,11 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
       z-index: 20;
     }
 
+
     .emoji-picker.open {
       display: grid;
     }
+
 
     .emoji {
       height: 34px;
@@ -649,6 +696,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
 
       cursor: pointer;
     }
+
 
     .emoji:hover {
       background:
@@ -671,6 +719,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         padding: 20px;
       }
 
+
       .app {
         width: min(1200px, 100%);
 
@@ -687,6 +736,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
           0 30px 100px rgba(0,0,0,0.45);
       }
 
+
       .topbar {
         min-height: 76px;
 
@@ -694,14 +744,17 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         padding-right: 22px;
       }
 
+
       .messages {
         padding-top: 25px;
         padding-bottom: 25px;
       }
 
+
       .bottom-bar {
         padding: 15px 22px;
       }
+
     }
 
 
@@ -715,6 +768,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         min-height: 61px;
       }
 
+
       .brand-logo {
         width: 38px;
         height: 38px;
@@ -722,21 +776,26 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         border-radius: 12px;
       }
 
+
       .brand-title {
         font-size: 16px;
       }
+
 
       .connection {
         font-size: 10px;
       }
 
+
       .messages {
         padding: 13px 10px;
       }
 
+
       .message-content {
         max-width: 88%;
       }
+
 
       .bubble {
         padding: 10px 12px;
@@ -744,13 +803,16 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         border-radius: 15px;
       }
 
+
       .message-text {
         font-size: 14px;
       }
 
+
       .bottom-bar {
         padding-top: 8px;
       }
+
 
       .message-input {
         height: 46px;
@@ -758,16 +820,19 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         padding: 0 12px;
       }
 
+
       .emoji-button {
         width: 44px;
         height: 46px;
       }
+
 
       .send-button {
         height: 46px;
 
         padding: 0 14px;
       }
+
     }
 
 
@@ -781,9 +846,11 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         display: none;
       }
 
+
       .connection {
         display: none;
       }
+
 
       .send-button {
         width: 46px;
@@ -793,189 +860,241 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=
         font-size: 0;
       }
 
+
       .send-button::after {
         content: "➡️";
 
         font-size: 17px;
       }
+
     }
 
-  </style></head><body>  <!-- =====================================================
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =====================================================
+       RANDOM WALLPAPER
+  ===================================================== -->
+
+  <script>
+
+    const wallpapers = [
+
+      "https://ac-o.arca.live/20241207sac/6f1fe2e5380dc0c55eda8dea0dc80bbc46d1126152add76b45245aa418134320.jpg?expires=1786399361&key=wOfpu_qPNlgWpvFzLy12-w&type=orig",
+
+      "https://static.wikia.nocookie.net/nikke-goddess-of-victory-international/images/b/b6/Guilty_%28Wave_of_Disbelief%29_cover_idle.png/revision/latest/scale-to-width-down/985?cb=20240926034038",
+
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLzngNK0aFLX14FqnfCLUX4cGHef2RSlRHcS4k4rFvRA&s=10",
+
+      "https://pbs.twimg.com/media/HNHe9JnbUAArm4X.jpg",
+
+      "https://pbs.twimg.com/media/HL-RU0va0AAYHRg.jpg",
+
+      "https://static.wikia.nocookie.net/nikke-goddess-of-victory-international/images/5/5d/Beauty_Full_Shot_Event_Title.png/revision/latest/scale-to-width-down/985?cb=20240704123421",
+
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXPFVWM6Ag9Hsj5QTC1rpDMp6LAEqt7v9zdIG97IPi2GqXW_To6epERLc&s=10",
+
+      "https://pbs.twimg.com/media/G-WPuy9XEAAztY7.jpg",
+
+      "https://w.wallhaven.cc/full/m3/wallhaven-m32pdy.jpg"
+
+    ];
+
+
+    const randomWallpaper =
+      wallpapers[
+        Math.floor(
+          Math.random() * wallpapers.length
+        )
+      ];
+
+
+    document.body.style.backgroundImage =
+      `url("${randomWallpaper}")`;
+
+  </script>
+
+
+  <!-- =====================================================
        LOGIN
-  ===================================================== -->  <div
+  ===================================================== -->
+
+  <div
     class="login-screen"
     id="loginScreen"
-  ><div class="login-card">
-
-  <div class="login-logo">
-    😼
-  </div>
-
-  <h1>
-    welcome to Nothing Panel chat!! ;)
-  </h1>
-
-  <p>
-    What's your roblox Name???
-  </p>
-
-  <input
-    class="name-input"
-    id="nameInput"
-    type="text"
-    maxlength="20"
-    autocomplete="nickname"
-    placeholder="Enter your name"
   >
 
-  <button
-    class="login-button"
-    id="loginButton"
-    type="button"
-  >
-    Log in
-  </button>
+    <div class="login-card">
 
-  <div
-    class="login-error"
-    id="loginError"
-  ></div>
-
-</div>
-
-  </div>  <!-- =====================================================
-       CHAT
-  ===================================================== -->  <main class="app" id="app"><header class="topbar">
-
-  <div class="brand">
-
-    <div class="brand-logo">
-      ☠️
-    </div>
-
-    <div class="brand-text">
-
-      <div class="brand-title">
-        NOTHING PANEL CHAT
+      <div class="login-logo">
+        😼
       </div>
 
-      <div class="brand-subtitle">
-        Panel walo ki baat chit hoti idhr !!
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <div
-    class="connection"
-    id="connection"
-  >
-
-    <span class="connection-dot"></span>
-
-    <span id="connectionText">
-      Connecting...
-    </span>
-
-  </div>
-
-</header>
-
-
-<section
-  class="messages"
-  id="messages"
->
-
-  <div
-    class="empty"
-    id="empty"
-  >
-
-    <div>
-
-      <div class="empty-icon">
-        🛞
-      </div>
+      <h1>
+        welcome to Nothing Panel chat!! ;)
+      </h1>
 
       <p>
-        No messages yet.<br>
-        Start the conversation!
+        What's your roblox Name???
       </p>
+
+      <input
+        class="name-input"
+        id="nameInput"
+        type="text"
+        maxlength="20"
+        autocomplete="nickname"
+        placeholder="Enter your name"
+      >
+
+      <button
+        class="login-button"
+        id="loginButton"
+        type="button"
+      >
+        Log in
+      </button>
+
+      <div
+        class="login-error"
+        id="loginError"
+      ></div>
 
     </div>
 
   </div>
 
-</section>
+
+  <!-- =====================================================
+       CHAT
+  ===================================================== -->
+
+  <main
+    class="app"
+    id="app"
+  >
+
+    <header class="topbar">
+
+      <div class="brand">
+
+        <div class="brand-logo">
+          ☠️
+        </div>
+
+        <div class="brand-text">
+
+          <div class="brand-title">
+            NOTHING PANEL CHAT
+          </div>
+
+          <div class="brand-subtitle">
+            Panel walo ki baat chit hoti idhr !!
+          </div>
+
+        </div>
+
+      </div>
 
 
-<div
-  class="emoji-picker"
-  id="emojiPicker"
-></div>
+      <div
+        class="connection"
+        id="connection"
+      >
+
+        <span class="connection-dot"></span>
+
+        <span id="connectionText">
+          Connecting...
+        </span>
+
+      </div>
+
+    </header>
 
 
-<footer class="bottom-bar">
-
-  <div class="composer">
-
-    <input
-      class="message-input"
-      id="messageInput"
-      type="text"
-      maxlength="500"
-      autocomplete="off"
-      placeholder="Type a message..."
+    <section
+      class="messages"
+      id="messages"
     >
 
-    <button
-      class="emoji-button"
-      id="emojiButton"
-      type="button"
-      aria-label="Emoji"
-    >
-      😄
-    </button>
+      <div
+        class="empty"
+        id="empty"
+      >
 
-    <button
-      class="send-button"
-      id="sendButton"
-      type="button"
-    >
-      Send
-    </button>
+        <div>
 
-  </div>
+          <div class="empty-icon">
+            🛞
+          </div>
 
-</footer>
+          <p>
+            No messages yet.<br>
+            Start the conversation!
+          </p>
 
-  </main>  <script>
+        </div>
+
+      </div>
+
+    </section>
 
 
-    <script>
-const wallpapers = [
-  "https://ac-o.arca.live/20241207sac/6f1fe2e5380dc0c55eda8dea0dc80bbc46d1126152add76b45245aa418134320.jpg?expires=1786399361&key=wOfpu_qPNlgWpvFzLy12-w&type=orig",
-  "https://static.wikia.nocookie.net/nikke-goddess-of-victory-international/images/b/b6/Guilty_%28Wave_of_Disbelief%29_cover_idle.png/revision/latest/scale-to-width-down/985?cb=20240926034038",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLzngNK0aFLX14FqnfCLUX4cGHef2RSlRHcS4k4rFvRA&s=10",
-  "https://pbs.twimg.com/media/HNHe9JnbUAArm4X.jpg",
-  "https://pbs.twimg.com/media/HL-RU0va0AAYHRg.jpg",
-  "https://static.wikia.nocookie.net/nikke-goddess-of-victory-international/images/5/5d/Beauty_Full_Shot_Event_Title.png/revision/latest/scale-to-width-down/985?cb=20240704123421",
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXPFVWM6Ag9Hsj5QTC1rpDMp6LAEqt7v9zdIG97IPi2GqXW_To6epERLc&s=10",
-  "https://pbs.twimg.com/media/G-WPuy9XEAAztY7.jpg",
-  "https://w.wallhaven.cc/full/m3/wallhaven-m32pdy.jpg"
-];
+    <div
+      class="emoji-picker"
+      id="emojiPicker"
+    ></div>
 
-const randomWallpaper =
-  wallpapers[Math.floor(Math.random() * wallpapers.length)];
 
-document.body.style.setProperty(
-  "--wallpaper",
-  `url("${randomWallpaper}")`
-);
-</script>
+    <footer class="bottom-bar">
+
+      <div class="composer">
+
+        <input
+          class="message-input"
+          id="messageInput"
+          type="text"
+          maxlength="500"
+          autocomplete="off"
+          placeholder="Type a message..."
+        >
+
+        <button
+          class="emoji-button"
+          id="emojiButton"
+          type="button"
+          aria-label="Emoji"
+        >
+          😄
+        </button>
+
+        <button
+          class="send-button"
+          id="sendButton"
+          type="button"
+        >
+          Send
+        </button>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+
+  <!-- =====================================================
+       CHAT JAVASCRIPT
+  ===================================================== -->
+
+  <script>
+
 
     /* =====================================================
        SERVER
@@ -1093,6 +1212,7 @@ document.body.style.setProperty(
       const name =
         nameInput.value.trim();
 
+
       if (!name) {
 
         loginError.textContent =
@@ -1102,6 +1222,7 @@ document.body.style.setProperty(
 
         return;
       }
+
 
       if (name.length < 2) {
 
@@ -1113,7 +1234,9 @@ document.body.style.setProperty(
         return;
       }
 
+
       username = name;
+
 
       try {
 
@@ -1131,14 +1254,19 @@ document.body.style.setProperty(
 
       }
 
+
       loginError.textContent = "";
+
 
       loginScreen.style.display =
         "none";
 
+
       messageInput.focus();
 
+
       startChat();
+
     }
 
 
@@ -1153,6 +1281,7 @@ document.body.style.setProperty(
     ===================================================== */
 
     let savedUsername = null;
+
 
     try {
 
@@ -1180,6 +1309,7 @@ document.body.style.setProperty(
         "none";
 
       startChat();
+
     }
 
 
@@ -1196,6 +1326,7 @@ document.body.style.setProperty(
           event.preventDefault();
 
           login();
+
         }
 
       }
@@ -1216,6 +1347,7 @@ document.body.style.setProperty(
 
       connectionText.textContent =
         text;
+
     }
 
 
@@ -1233,6 +1365,7 @@ document.body.style.setProperty(
         String(message.source || ""),
         String(message.jobId || "")
       ].join("|||");
+
     }
 
 
@@ -1246,7 +1379,9 @@ document.body.style.setProperty(
         return;
       }
 
+
       loadingMessages = true;
+
 
       try {
 
@@ -1322,7 +1457,9 @@ document.body.style.setProperty(
 
         loadingMessages =
           false;
+
       }
+
     }
 
 
@@ -1341,6 +1478,7 @@ document.body.style.setProperty(
       ) {
 
         return;
+
       }
 
 
@@ -1358,6 +1496,7 @@ document.body.style.setProperty(
 
         lastMessageTime =
           messageTime;
+
       }
 
 
@@ -1368,15 +1507,6 @@ document.body.style.setProperty(
       const wrapper =
         document.createElement("div");
 
-
-      /*
-        IMPORTANT:
-
-        Use the Roblox username for determining
-        whether the message belongs to us.
-
-        Display name is only for visual display.
-      */
 
       const isMine =
         message.user === username;
@@ -1413,13 +1543,6 @@ document.body.style.setProperty(
         "username";
 
 
-      /*
-        DISPLAY NAME FIRST.
-
-        Falls back to username if the server
-        doesn't provide displayName.
-      */
-
       const displayName =
         message.displayName ||
         message.user ||
@@ -1429,12 +1552,6 @@ document.body.style.setProperty(
       user.textContent =
         displayName;
 
-
-      /*
-        Color based on username so the same
-        account keeps the same color even if
-        its display name changes.
-      */
 
       user.style.color =
         getNameColor(
@@ -1512,13 +1629,16 @@ document.body.style.setProperty(
         const source =
           document.createElement("span");
 
+
         source.textContent =
           "• " +
           message.source;
 
+
         meta.appendChild(
           source
         );
+
       }
 
 
@@ -1559,7 +1679,9 @@ document.body.style.setProperty(
 
           }
         );
+
       }
+
     }
 
 
@@ -1579,6 +1701,7 @@ document.body.style.setProperty(
           "flex";
 
         return;
+
       }
 
 
@@ -1609,12 +1732,6 @@ document.body.style.setProperty(
                 user:
                   username,
 
-                /*
-                  Website users don't have a
-                  separate Roblox display name
-                  unless they provide one.
-                */
-
                 displayName:
                   username,
 
@@ -1637,12 +1754,14 @@ document.body.style.setProperty(
           const error =
             await response.text();
 
+
           throw new Error(
             "HTTP " +
             response.status +
             " " +
             error
           );
+
         }
 
 
@@ -1658,6 +1777,7 @@ document.body.style.setProperty(
           addMessage(
             result.message
           );
+
         }
 
 
@@ -1691,7 +1811,9 @@ document.body.style.setProperty(
 
         sendButton.disabled =
           false;
+
       }
+
     }
 
 
@@ -1717,6 +1839,7 @@ document.body.style.setProperty(
           event.preventDefault();
 
           sendMessage();
+
         }
 
       }
@@ -1746,11 +1869,14 @@ document.body.style.setProperty(
             "button"
           );
 
+
         button.className =
           "emoji";
 
+
         button.type =
           "button";
+
 
         button.textContent =
           emoji;
@@ -1771,6 +1897,7 @@ document.body.style.setProperty(
         emojiPicker.appendChild(
           button
         );
+
       }
     );
 
@@ -1780,6 +1907,7 @@ document.body.style.setProperty(
       emojiPicker.classList.toggle(
         "open"
       );
+
     }
 
 
@@ -1790,6 +1918,7 @@ document.body.style.setProperty(
         event.stopPropagation();
 
         toggleEmojiPicker();
+
       }
     );
 
@@ -1801,8 +1930,10 @@ document.body.style.setProperty(
       const start =
         messageInput.selectionStart;
 
+
       const end =
         messageInput.selectionEnd;
+
 
       const value =
         messageInput.value;
@@ -1831,6 +1962,7 @@ document.body.style.setProperty(
         position,
         position
       );
+
     }
 
 
@@ -1853,7 +1985,9 @@ document.body.style.setProperty(
           emojiPicker.classList.remove(
             "open"
           );
+
         }
+
       }
     );
 
@@ -1868,6 +2002,7 @@ document.body.style.setProperty(
         return;
       }
 
+
       chatStarted = true;
 
 
@@ -1876,47 +2011,17 @@ document.body.style.setProperty(
 
       /*
         Poll every 500ms.
-
-        The loading lock prevents overlapping
-        requests and fingerprints prevent
-        duplicate messages.
       */
 
       setInterval(
         loadMessages,
         500
       );
+
     }
 
   </script>
 
-          html,
-body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
 
-body {
-  position: relative;
-
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-
-  color: #fff;
-
-  background-color: #080b10;
-  background-image: var(--wallpaper);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-}
-          
-        </body>
+</body>
 </html>
