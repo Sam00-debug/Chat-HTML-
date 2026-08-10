@@ -1,24 +1,12 @@
-
-
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover"
-  >
+«»
 
-  <meta name="theme-color" content="#10151d">
-
-  <title> NOTHING_PANEL_Chat</title>
-
-  <style>
-
-    /* =====================================================
-       localStorage.removeItem("mychat_username");
-    ===================================================== */
+  <meta name="theme-color" content="#10151d">  <title>NOTHING_PANEL_Chat</title>  <style>
 
     * {
       box-sizing: border-box;
@@ -61,8 +49,8 @@
 
       background-image:
         linear-gradient(
-          rgba(5, 8, 13, 0.62),
-          rgba(5, 8, 13, 0.82)
+          rgba(5, 8, 13, 0.35),
+          rgba(5, 8, 13, 0.55)
         ),
         url("https://i0.wp.com/uploads.saigacdn.com/2024/06/nikke-beautyfullshot-announce-02.jpg");
 
@@ -82,14 +70,14 @@
       background:
         radial-gradient(
           circle at top,
-          rgba(70, 120, 255, 0.12),
+          rgba(70, 120, 255, 0.08),
           transparent 40%
         );
     }
 
 
     /* =====================================================
-       LOGIN SCREEN
+       LOGIN
     ===================================================== */
 
     .login-screen {
@@ -102,8 +90,7 @@
 
       padding: 20px;
 
-      background:
-        rgba(5, 8, 13, 0.55);
+      background: transparent;
 
       z-index: 100;
     }
@@ -116,9 +103,10 @@
       border-radius: 24px;
 
       background:
-        rgba(18, 24, 33, 0.88);
+        rgba(18, 24, 33, 0.72);
 
-      border: 1px solid rgba(255,255,255,0.1);
+      border:
+        1px solid rgba(255,255,255,0.1);
 
       box-shadow:
         0 25px 80px rgba(0,0,0,0.55);
@@ -160,8 +148,10 @@
 
     .login-card p {
       color: #9da8b7;
+
       font-size: 14px;
       line-height: 1.5;
+
       margin-bottom: 25px;
     }
 
@@ -170,7 +160,8 @@
 
       padding: 15px 16px;
 
-      border: 1px solid #303b49;
+      border:
+        1px solid #303b49;
 
       border-radius: 14px;
 
@@ -244,8 +235,7 @@
       display: flex;
       flex-direction: column;
 
-      background:
-        transparent;
+      background: transparent;
     }
 
 
@@ -271,7 +261,7 @@
       gap: 15px;
 
       background:
-        rgba(12, 17, 24, 0.88);
+        rgba(12, 17, 24, 0.55);
 
       border-bottom:
         1px solid rgba(255,255,255,0.08);
@@ -289,23 +279,20 @@
       min-width: 0;
     }
 
-.brand-logo {
-  width: 43px;
-  height: 43px;
+    .brand-logo {
+      width: 43px;
+      height: 43px;
 
-  flex-shrink: 0;
+      flex-shrink: 0;
 
-  display: grid;
-  place-items: center;
+      display: grid;
+      place-items: center;
 
-  border-radius: 14px;
+      border-radius: 14px;
 
-  background: transparent;
+      background: transparent;
 
-  font-size: 24px;
-}
-
-      font-size: 21px;
+      font-size: 24px;
     }
 
     .brand-text {
@@ -368,7 +355,7 @@
 
 
     /* =====================================================
-       CHAT AREA
+       CHAT
     ===================================================== */
 
     .messages {
@@ -392,7 +379,8 @@
     }
 
     .messages::-webkit-scrollbar-thumb {
-      background: rgba(255,255,255,0.15);
+      background:
+        rgba(255,255,255,0.15);
 
       border-radius: 10px;
     }
@@ -453,7 +441,8 @@
 
       border-radius: 17px;
 
-      background: #2d333a;
+      background:
+        rgba(45, 51, 58, 0.82);
 
       border:
         1px solid rgba(255,255,255,0.07);
@@ -462,18 +451,22 @@
         0 5px 20px rgba(0,0,0,0.12);
 
       word-break: break-word;
+
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
-.mine .bubble {
-  background: linear-gradient(
-    135deg,
-    #176f82,
-    #248f88
-  );
+    .mine .bubble {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(23,111,130,0.92),
+          rgba(36,143,136,0.92)
+        );
 
-  border-color:
-    rgba(255,255,255,0.08);
-      }
+      border-color:
+        rgba(255,255,255,0.08);
+    }
 
     .username {
       margin-bottom: 4px;
@@ -490,10 +483,6 @@
 
       white-space: pre-wrap;
     }
-
-    
-      
-    
 
     .message-meta {
       margin-top: 4px;
@@ -517,7 +506,7 @@
 
 
     /* =====================================================
-       BOTTOM BAR
+       BOTTOM
     ===================================================== */
 
     .bottom-bar {
@@ -530,7 +519,7 @@
         max(12px, env(safe-area-inset-left));
 
       background:
-        rgba(12, 17, 24, 0.91);
+        rgba(12, 17, 24, 0.58);
 
       border-top:
         1px solid rgba(255,255,255,0.08);
@@ -564,11 +553,13 @@
 
       border-radius: 16px;
 
-      border: 1px solid #303b49;
+      border:
+        1px solid #303b49;
 
       outline: none;
 
-      background: #18212c;
+      background:
+        rgba(24,33,44,0.82);
 
       color: white;
 
@@ -588,11 +579,13 @@
 
       flex-shrink: 0;
 
-      border: 1px solid #303b49;
+      border:
+        1px solid #303b49;
 
       border-radius: 15px;
 
-      background: #18212c;
+      background:
+        rgba(24,33,44,0.82);
 
       color: white;
 
@@ -634,7 +627,7 @@
 
 
     /* =====================================================
-       EMOJI PICKER
+       EMOJI
     ===================================================== */
 
     .emoji-picker {
@@ -658,7 +651,7 @@
       border-radius: 18px;
 
       background:
-        rgba(20, 27, 36, 0.97);
+        rgba(20,27,36,0.97);
 
       border:
         1px solid rgba(255,255,255,0.1);
@@ -693,7 +686,8 @@
     }
 
     .emoji:hover {
-      background: rgba(255,255,255,0.1);
+      background:
+        rgba(255,255,255,0.1);
     }
 
 
@@ -743,7 +737,6 @@
       .bottom-bar {
         padding: 15px 22px;
       }
-
     }
 
 
@@ -810,7 +803,6 @@
 
         padding: 0 14px;
       }
-
     }
 
 
@@ -841,192 +833,161 @@
 
         font-size: 17px;
       }
-
     }
 
-  </style>
-</head>
-
-
-<body>
-
-
-  <!-- =====================================================
+  </style></head><body>  <!-- =====================================================
        LOGIN
-  ===================================================== -->
-
-  <div
+  ===================================================== -->  <div
     class="login-screen"
     id="loginScreen"
+  ><div class="login-card">
+
+  <div class="login-logo">
+    😼
+  </div>
+
+  <h1>
+    welcome to Nothing Panel chat!! ;)
+  </h1>
+
+  <p>
+    What's your roblox Name???
+  </p>
+
+  <input
+    class="name-input"
+    id="nameInput"
+    type="text"
+    maxlength="20"
+    autocomplete="nickname"
+    placeholder="Enter your name"
   >
 
-    <div class="login-card">
+  <button
+    class="login-button"
+    id="loginButton"
+    type="button"
+  >
+    Log in
+  </button>
 
-      <div class="login-logo">
-        😼
+  <div
+    class="login-error"
+    id="loginError"
+  ></div>
+
+</div>
+
+  </div>  <!-- =====================================================
+       CHAT
+  ===================================================== -->  <main class="app" id="app"><header class="topbar">
+
+  <div class="brand">
+
+    <div class="brand-logo">
+      ☠️
+    </div>
+
+    <div class="brand-text">
+
+      <div class="brand-title">
+        NOTHING PANEL CHAT
       </div>
 
-      <h1>
-        welcome to Nothing Panel chat!! ;)
-      </h1>
-
-      <p>
-        What's your roblox Name???
-       </p>
-      <input
-        class="name-input"
-        id="nameInput"
-        type="text"
-        maxlength="20"
-        autocomplete="nickname"
-        placeholder="Enter your name"
-      >
-
-      <button
-        class="login-button"
-        onclick="login()"
-      >
-        Log in
-      </button>
-
-      <div
-        class="login-error"
-        id="loginError"
-      ></div>
+      <div class="brand-subtitle">
+        Panel walo ki baat chit hoti idhr !!
+      </div>
 
     </div>
 
   </div>
 
 
-  <!-- =====================================================
-       CHAT APP
-  ===================================================== -->
+  <div
+    class="connection"
+    id="connection"
+  >
 
-  <main class="app" id="app">
+    <span class="connection-dot"></span>
+
+    <span id="connectionText">
+      Connecting...
+    </span>
+
+  </div>
+
+</header>
 
 
-    <!-- TOP BAR -->
+<section
+  class="messages"
+  id="messages"
+>
 
-    <header class="topbar">
+  <div
+    class="empty"
+    id="empty"
+  >
 
-      <div class="brand">
+    <div>
 
-        <div class="brand-logo">
-          ☠️
-        </div>
-
-        <div class="brand-text">
-
-          <div class="brand-title">
-              NOTHING PANEL CHAT
-          </div>
-
-          <div class="brand-subtitle">
-            Panel walo ki baat chit hoti idhr !!
-          </div>
-
-        </div>
-
+      <div class="empty-icon">
+        🛞
       </div>
 
+      <p>
+        No messages yet.<br>
+        Start the conversation!
+      </p>
 
-      <div
-        class="connection"
-        id="connection"
-      >
+    </div>
 
-        <span class="connection-dot"></span>
+  </div>
 
-        <span id="connectionText">
-          Connecting...
-        </span>
-
-      </div>
-
-    </header>
+</section>
 
 
-    <!-- MESSAGES -->
+<div
+  class="emoji-picker"
+  id="emojiPicker"
+></div>
 
-    <section
-      class="messages"
-      id="messages"
+
+<footer class="bottom-bar">
+
+  <div class="composer">
+
+    <input
+      class="message-input"
+      id="messageInput"
+      type="text"
+      maxlength="500"
+      autocomplete="off"
+      placeholder="Type a message..."
     >
 
-      <div
-        class="empty"
-        id="empty"
-      >
+    <button
+      class="emoji-button"
+      id="emojiButton"
+      type="button"
+      aria-label="Emoji"
+    >
+      😄
+    </button>
 
-        <div>
+    <button
+      class="send-button"
+      id="sendButton"
+      type="button"
+    >
+      Send
+    </button>
 
-          <div class="empty-icon">
-            🛞
-          </div>
+  </div>
 
-          <p>
-            No messages yet.<br>
-            Start the conversation!
-          </p>
+</footer>
 
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- EMOJI PICKER -->
-
-    <div
-      class="emoji-picker"
-      id="emojiPicker"
-    ></div>
-
-
-    <!-- BOTTOM -->
-
-    <footer class="bottom-bar">
-
-      <div class="composer">
-
-        <input
-          class="message-input"
-          id="messageInput"
-          type="text"
-          maxlength="500"
-          autocomplete="off"
-          placeholder="Type a message..."
-        >
-
-        <button
-          class="emoji-button"
-          id="emojiButton"
-          type="button"
-          onclick="toggleEmojiPicker()"
-          aria-label="Emoji"
-        >
-          😄
-        </button>
-
-        <button
-          class="send-button"
-          id="sendButton"
-          type="button"
-          onclick="sendMessage()"
-        >
-          Send
-        </button>
-
-      </div>
-
-    </footer>
-
-  </main>
-
-
-  <script>
+  </main>  <script>
 
     /* =====================================================
        SERVER
@@ -1046,25 +1007,10 @@
 
     let loadingMessages = false;
 
-    /*
-      This is the main duplicate protection.
-
-      Every displayed message gets a fingerprint.
-
-      Even if Render returns the exact same message
-      20 times, we only display it once.
-    */
+    let chatStarted = false;
 
     const displayedMessages =
       new Set();
-
-
-    /*
-      Prevent old messages from being loaded again
-      when polling.
-    */
-
-    let newestServerTime = 0;
 
 
     /* =====================================================
@@ -1073,6 +1019,9 @@
 
     const loginScreen =
       document.getElementById("loginScreen");
+
+    const loginButton =
+      document.getElementById("loginButton");
 
     const nameInput =
       document.getElementById("nameInput");
@@ -1098,6 +1047,9 @@
     const sendButton =
       document.getElementById("sendButton");
 
+    const emojiButton =
+      document.getElementById("emojiButton");
+
     const emojiPicker =
       document.getElementById("emojiPicker");
 
@@ -1120,12 +1072,6 @@
     ];
 
 
-    /*
-      Same username gets the same color.
-
-      It looks random but stays consistent.
-    */
-
     function getNameColor(name) {
 
       let hash = 0;
@@ -1147,7 +1093,6 @@
         nameColors.length;
 
       return nameColors[index];
-
     }
 
 
@@ -1160,55 +1105,82 @@
       const name =
         nameInput.value.trim();
 
-
       if (!name) {
 
         loginError.textContent =
           "Please enter a name.";
 
+        nameInput.focus();
+
         return;
-
       }
-
 
       if (name.length < 2) {
 
         loginError.textContent =
           "Name must be at least 2 characters.";
 
+        nameInput.focus();
+
         return;
-
       }
-
 
       username = name;
 
-      localStorage.setItem(
-        "mychat_username",
-        username
-      );
+      try {
 
+        localStorage.setItem(
+          "mychat_username",
+          username
+        );
+
+      } catch (error) {
+
+        console.warn(
+          "localStorage unavailable:",
+          error
+        );
+
+      }
+
+      loginError.textContent = "";
 
       loginScreen.style.display =
         "none";
 
-
       messageInput.focus();
 
-
       startChat();
-
     }
+
+
+    loginButton.addEventListener(
+      "click",
+      login
+    );
 
 
     /* =====================================================
        LOAD SAVED LOGIN
     ===================================================== */
 
-    const savedUsername =
-      localStorage.getItem(
-        "mychat_username"
+    let savedUsername = null;
+
+    try {
+
+      savedUsername =
+        localStorage.getItem(
+          "mychat_username"
+        );
+
+    } catch (error) {
+
+      console.warn(
+        "Could not read localStorage:",
+        error
       );
+
+    }
 
 
     if (savedUsername) {
@@ -1220,7 +1192,6 @@
         "none";
 
       startChat();
-
     }
 
 
@@ -1233,6 +1204,9 @@
       function(event) {
 
         if (event.key === "Enter") {
+
+          event.preventDefault();
+
           login();
         }
 
@@ -1241,7 +1215,7 @@
 
 
     /* =====================================================
-       CONNECTION STATUS
+       CONNECTION
     ===================================================== */
 
     function setConnection(
@@ -1254,7 +1228,6 @@
 
       connectionText.textContent =
         text;
-
     }
 
 
@@ -1264,21 +1237,15 @@
 
     function messageFingerprint(message) {
 
-      /*
-        Your Render server currently doesn't give
-        every message a unique ID.
-
-        So we create a strong fingerprint.
-
-        Includes:
-        - timestamp
-        - username
-        - message
-        - source
-        - jobId
-      */
-
-      
+      return [
+        String(message.time || ""),
+        String(message.user || ""),
+        String(message.displayName || ""),
+        String(message.msg || ""),
+        String(message.source || ""),
+        String(message.jobId || "")
+      ].join("|||");
+    }
 
 
     /* =====================================================
@@ -1287,28 +1254,11 @@
 
     async function loadMessages() {
 
-      /*
-        VERY IMPORTANT:
-
-        Don't allow multiple polling requests
-        to overlap.
-
-        This stops a common source of duplicates.
-      */
-
       if (loadingMessages) {
         return;
       }
 
-   return [
-  String(message.time || ""),
-  String(message.user || ""),
-  String(message.displayName || ""),
-  String(message.msg || ""),
-  String(message.source || ""),
-  String(message.jobId || "")
-].join("|||");   loadingMessages = true;
-
+      loadingMessages = true;
 
       try {
 
@@ -1355,12 +1305,6 @@
         );
 
 
-        /*
-          Sort messages oldest → newest.
-
-          This keeps the chat ordered correctly.
-        */
-
         data.sort(
           (a, b) =>
             Number(a.time || 0) -
@@ -1390,9 +1334,7 @@
 
         loadingMessages =
           false;
-
       }
-
     }
 
 
@@ -1402,46 +1344,20 @@
 
     function addMessage(message) {
 
-      /*
-        Create fingerprint BEFORE rendering.
-      */
-
       const id =
         messageFingerprint(message);
 
-
-      /*
-        THE IMPORTANT FIX:
-
-        If we've already shown this exact message,
-        completely ignore it.
-
-        This protects against:
-        - repeated polling
-        - overlapping requests
-        - duplicate server entries
-        - immediate send + polling duplication
-      */
 
       if (
         displayedMessages.has(id)
       ) {
 
         return;
-
       }
 
 
       displayedMessages.add(id);
 
-
-      /*
-        Update newest timestamp.
-
-        IMPORTANT:
-        We update this even for messages we display,
-        so future requests only ask for newer messages.
-      */
 
       const messageTime =
         Number(message.time || 0);
@@ -1454,7 +1370,6 @@
 
         lastMessageTime =
           messageTime;
-
       }
 
 
@@ -1462,11 +1377,18 @@
         "none";
 
 
-      /* MESSAGE */
-
       const wrapper =
         document.createElement("div");
 
+
+      /*
+        IMPORTANT:
+
+        Use the Roblox username for determining
+        whether the message belongs to us.
+
+        Display name is only for visual display.
+      */
 
       const isMine =
         message.user === username;
@@ -1485,8 +1407,6 @@
         "message-content";
 
 
-      /* BUBBLE */
-
       const bubble =
         document.createElement("div");
 
@@ -1494,7 +1414,9 @@
         "bubble";
 
 
-      /* USERNAME */
+      /* =================================================
+         DISPLAY NAME
+      ================================================= */
 
       const user =
         document.createElement("div");
@@ -1502,32 +1424,46 @@
       user.className =
         "username";
 
+
+      /*
+        DISPLAY NAME FIRST.
+
+        Falls back to username if the server
+        doesn't provide displayName.
+      */
+
+      const displayName =
+        message.displayName ||
+        message.user ||
+        "Unknown";
+
+
       user.textContent =
-  message.displayName ||
-  message.user ||
-  "Unknown";
-      
+        displayName;
+
+
+      /*
+        Color based on username so the same
+        account keeps the same color even if
+        its display name changes.
+      */
+
       user.style.color =
         getNameColor(
           message.user ||
-          "Unknown"
+          displayName
         );
 
 
-      /* TEXT */
+      /* =================================================
+         MESSAGE TEXT
+      ================================================= */
 
       const text =
         document.createElement("div");
 
       text.className =
         "message-text";
-
-      /*
-        textContent is intentional.
-
-        It prevents someone from putting HTML
-        or scripts inside a message.
-      */
 
       text.textContent =
         message.msg || "";
@@ -1542,7 +1478,9 @@
       );
 
 
-      /* TIME BELOW BUBBLE */
+      /* =================================================
+         META
+      ================================================= */
 
       const meta =
         document.createElement("div");
@@ -1578,14 +1516,6 @@
       );
 
 
-      /*
-        Source is only shown when it isn't
-        the website.
-
-        This helps distinguish Roblox/Discord
-        messages without making the UI messy.
-      */
-
       if (
         message.source &&
         message.source !== "website"
@@ -1601,7 +1531,6 @@
         meta.appendChild(
           source
         );
-
       }
 
 
@@ -1624,14 +1553,6 @@
       );
 
 
-      /*
-        Scroll only when the user is already
-        near the bottom.
-
-        This prevents jumping while reading
-        older messages.
-      */
-
       const distanceFromBottom =
         messagesElement.scrollHeight -
         messagesElement.scrollTop -
@@ -1650,9 +1571,7 @@
 
           }
         );
-
       }
-
     }
 
 
@@ -1672,7 +1591,6 @@
           "flex";
 
         return;
-
       }
 
 
@@ -1703,6 +1621,15 @@
                 user:
                   username,
 
+                /*
+                  Website users don't have a
+                  separate Roblox display name
+                  unless they provide one.
+                */
+
+                displayName:
+                  username,
+
                 msg:
                   msg,
 
@@ -1713,7 +1640,6 @@
                   false
 
               })
-
             }
           );
 
@@ -1729,22 +1655,12 @@
             " " +
             error
           );
-
         }
 
 
         const result =
           await response.json();
 
-
-        /*
-          Render returns the newly-created message.
-
-          Add it immediately.
-
-          The fingerprint prevents the next polling
-          request from displaying it again.
-        */
 
         if (
           result &&
@@ -1754,7 +1670,6 @@
           addMessage(
             result.message
           );
-
         }
 
 
@@ -1777,19 +1692,25 @@
           "Send failed"
         );
 
+
         alert(
           "Message could not be sent.\n\n" +
           "Check that your Render server is running."
         );
 
+
       } finally {
 
         sendButton.disabled =
           false;
-
       }
-
     }
+
+
+    sendButton.addEventListener(
+      "click",
+      sendMessage
+    );
 
 
     /* =====================================================
@@ -1808,7 +1729,6 @@
           event.preventDefault();
 
           sendMessage();
-
         }
 
       }
@@ -1821,8 +1741,8 @@
 
     const emojis = [
       "😼","😃","🗿","😁","😆","😅","😏","🤣",
-      "😊","😜","🙂","😏","😓","😌","😍","🥰",
-      "😘","😎","🤩","🥳","🤔","🤪","🤔","🫡",
+      "😊","😜","🙂","😓","😌","😍","🥰",
+      "😘","😎","🤩","🥳","🤔","🤪","🫡",
       "😴","😭","😡","🤯","🥺","😛","❤️","🙄",
       "🥵","😈","👽","👺","🔥","🤦🏻‍♂️","😾","💝",
       "👍","👎","💔","🥀","🙏","🤡","👀","✨",
@@ -1848,20 +1768,21 @@
           emoji;
 
 
-        button.onclick =
-          () => {
+        button.addEventListener(
+          "click",
+          function() {
 
             insertEmoji(
               emoji
             );
 
-          };
+          }
+        );
 
 
         emojiPicker.appendChild(
           button
         );
-
       }
     );
 
@@ -1871,8 +1792,18 @@
       emojiPicker.classList.toggle(
         "open"
       );
-
     }
+
+
+    emojiButton.addEventListener(
+      "click",
+      function(event) {
+
+        event.stopPropagation();
+
+        toggleEmojiPicker();
+      }
+    );
 
 
     function insertEmoji(
@@ -1912,11 +1843,12 @@
         position,
         position
       );
-
     }
 
 
-    /* Close emoji picker when clicking outside */
+    /* =====================================================
+       CLOSE EMOJI PICKER
+    ===================================================== */
 
     document.addEventListener(
       "click",
@@ -1926,16 +1858,14 @@
           !emojiPicker.contains(
             event.target
           ) &&
-          event.target.id !==
-            "emojiButton"
+          event.target !==
+            emojiButton
         ) {
 
           emojiPicker.classList.remove(
             "open"
           );
-
         }
-
       }
     );
 
@@ -1946,24 +1876,29 @@
 
     function startChat() {
 
+      if (chatStarted) {
+        return;
+      }
+
+      chatStarted = true;
+
+
       loadMessages();
 
 
       /*
-        Poll every 2 seconds.
+        Poll every 500ms.
 
-        The lock + fingerprint system prevents
-        duplicates.
+        The loading lock prevents overlapping
+        requests and fingerprints prevent
+        duplicate messages.
       */
 
       setInterval(
         loadMessages,
         500
       );
-
     }
 
-  </script>
-
-</body>
+  </script></body>
 </html>
