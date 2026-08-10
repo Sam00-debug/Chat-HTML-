@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MyChat</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #111;
+      height: 100vh;
+      color: white;
+    }
+
+    .app {
+      max-width: 600px;
+      height: 100vh;
+      margin: auto;
+      background: #181818;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header {
+      padding: 18px;
+      background: #222;
+      border-bottom: 1px solid #333;
+    }
+
+    .header h1 {
+      font-size: 21px;
+    }
+
+    .status {
+      font-size: 12px;
+      color: #8aff8a;
+      margin-top: 4px;
+    }
+
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 15px;
+    }
+
+    .message {
+      margin-bottom: 12px;
+      padding: 10px 13px;
+      background: #292929;
+      border-radius: 12px;
+      width: fit-content;
+      max-width: 85%;
+    }
+
+    .message .user {
+      font-size: 12px;
+      font-weight: bold;
+      color: #aaa;
+      margin-bottom: 4px;
+    }
+
+    .message .text {
+      font-size: 15px;
+      word-wrap: break-word;
+    }
+
+    .message .time {
+      font-size: 10px;
+      color: #777;
+      margin-top: 5px;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      background: #222;
+      border-top: 1px solid #333;
+    }
+
+    #username {
+      width: 90px;
+    }
+
+    input {
+      border: none;
+      outline: none;
+      background: #333;
+      color: white;
+      padding: 12px;
+      border-radius: 20px;
+    }
+
+    #messageInput {
+      flex: 1;
+    }
+
+    button {
+      border: none;
+      background: #4f7cff;
+      color: white;
+      padding: 0 18px;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <div class="header">
+      <h1>💬 MyChat</h1>
+      <div class="status" id="status">Connecting...</div>
+    </div>
+
+    <div class="messages" id="messages"></div>
+
+    <div class="input-area">
+
+      <input
+        id="username"
+        type="text"
+        placeholder="Name"
+        maxlength="20"
+      >
+
+      <input
+        id="messageInput"
+        type="text"
+        placeholder="Message..."
+        maxlength="500"
+      >
+
+      <button onclick="sendMessage()">Send</button>
+
+    </div>
+
+  </div>
+
+  <script>
+
+    // ==========================================
+    // YOUR RENDER SERVER
+    // ==========================================
+
+    const SERVER_URL = "https://my-roblox-private-chat.onrender.com";
+
+
+    // ==========================================
+    // VARIABLES
+    // ==========================================
+
+    let lastMessageTime = 0;
+
+
+    // ==========================================
+    // LOAD MESSAGES
+    // ==========================================
+
+    async function loadMessages() {
+
+      try {
+
+        const response = await fetch(
+          SERVER_URL + "/messages?since=" + lastMessageTime
+        );
+
+        if (!response.ok) {
+          throw new Error("Server error");
+        }
+
+        const newMessages = await response.json();
+
+        document.getElementById("status").textContent =
+          "● Connected";
+
+        newMessages.forEach(addMessage);
+
+      } catch (error) {
+
+        console.log(error);
+
+        document.getElementById("status").textContent =
+          "● Disconnected";
+
+      }
+
+    }
+
+
+    // ==========================================
+    // DISPLAY MESSAGE
+    // ==========================================
+
+    function addMessage(message) {
+
+      const container =
+        document.getElementById("messages");
+
+      const div = document.createElement("div");
+
+      div.className = "message";
+
+      const user = document.createElement("div");
+      user.className = "user";
+      user.textContent = message.user;
+
+      const text = document.createElement("div");
+      text.className = "text";
+      text.textContent = message.msg;
+
+      const time = document.createElement("div");
+      time.className = "time";
+
+      time.textContent =
+        new Date(message.time).toLocaleTimeString();
+
+      div.appendChild(user);
+      div.appendChild(text);
+      div.appendChild(time);
+
+      container.appendChild(div);
+
+      lastMessageTime =
+        Math.max(lastMessageTime, message.time);
+
+      container.scrollTop =
+        container.scrollHeight;
+    }
+
+
+    // ==========================================
+    // SEND MESSAGE
+    // ==========================================
+
+    async function sendMessage() {
+
+      const username =
+        document.getElementById("username").value.trim();
+
+      const input =
+        document.getElementById("messageInput");
+
+      const msg = input.value.trim();
+
+      if (!username) {
+        alert("Enter your name first.");
+        return;
+      }
+
+      if (!msg) {
+        return;
+      }
+
+      try {
+
+        const response = await fetch(
+          SERVER_URL + "/send",
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+              user: username,
+              msg: msg,
+              source: "website",
+              private: false
+            })
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Message failed");
+        }
+
+        input.value = "";
+
+        await loadMessages();
+
+      } catch (error) {
+
+        alert("Could not send message.");
+
+        console.log(error);
+      }
+
+    }
+
+
+    // ==========================================
+    // ENTER KEY
+    // ==========================================
+
+    document
+      .getElementById("messageInput")
+      .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+
+      });
+
+
+    // ==========================================
+    // CHECK SERVER EVERY 1 SECOND
+    // ==========================================
+
+    loadMessages();
+
+    setInterval(loadMessages, 1000);
+
+  </script>
+
+</body>
+</html>
