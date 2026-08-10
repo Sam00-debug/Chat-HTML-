@@ -245,7 +245,7 @@
       flex-direction: column;
 
       background:
-        rgba(9, 13, 19, 0.45);
+        transparent;
     }
 
 
@@ -1278,15 +1278,7 @@
         - jobId
       */
 
-      return [
-        String(message.time || ""),
-        String(message.user || ""),
-        String(message.msg || ""),
-        String(message.source || ""),
-        String(message.jobId || "")
-      ].join("|||");
-
-    }
+      
 
 
     /* =====================================================
@@ -1308,7 +1300,14 @@
         return;
       }
 
-      loadingMessages = true;
+   return [
+  String(message.time || ""),
+  String(message.user || ""),
+  String(message.displayName || ""),
+  String(message.msg || ""),
+  String(message.source || ""),
+  String(message.jobId || "")
+].join("|||");   loadingMessages = true;
 
 
       try {
@@ -1504,9 +1503,10 @@
         "username";
 
       user.textContent =
-        message.user ||
-        "Unknown";
-
+  message.displayName ||
+  message.user ||
+  "Unknown";
+      
       user.style.color =
         getNameColor(
           message.user ||
