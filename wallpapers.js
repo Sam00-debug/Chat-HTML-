@@ -15,5 +15,22 @@ const wallpapers = [
 
   "https://pbs.twimg.com/media/G-WPuy9XEAAztY7.jpg",
 
-  "https://w.wallhaven.cc/full/m3/wallhaven-m32pdy.jpg"
+  "https://w.wallhaven.cc/full/m3/wallhaven-m32pdy.jpg",
+
+  "https://wallpapercave.com/wp/wp1860723.png",
+
+"https://pbs.twimg.com/media/Go5L4bCawAEHz6f.jpg",
+
+"https://i.ebayimg.com/images/g/hCwAAOSw3MhlbAZy/s-l1200.jpg",
+
+
+"https://pbs.twimg.com/media/GLAofIgX0AAgI51.jpg",
+
+"https://s1.zerochan.net/Nayuta.%28NIKKE%29.600.4611732.jpg",
+
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLP_BNwM-2IgVFH4_ZDnTxfq6PnbqbtmqJFlTvsfD2aUFwW7_tdAGNk9pv&s=10",
+
+"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSbDmuLZbo-FstkDWLvU9FQjoYea0mqqIRnmFGC6XuWhIOLVglS9qWlsANo&s=10"
+
+
 ];
