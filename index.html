@@ -442,9 +442,9 @@
 
 
     .bubble {
-      padding: 3px 3px;
+      padding: 8px 12px;
 
-      border-radius: 5px;
+      border-radius: 14px;
 
       background:
         rgba(45, 51, 58, 0.82);
@@ -473,7 +473,7 @@
 
 
     .username {
-      margin-bottom: 2px;
+      margin-bottom: 4px;
 
       font-size: 12px;
 
@@ -491,7 +491,7 @@
 
 
     .message-meta {
-      margin-top: 2px;
+      margin-top: 4px;
 
       padding: 0 3px;
 
@@ -503,7 +503,7 @@
 
       color: #8b96a5;
 
-      font-size: 6px;
+      font-size: 10px;
     }
 
 
@@ -883,13 +883,15 @@
   
   <script src="wallpapers.js"></script>
 
-<script>
-  const randomWallpaper =
-    wallpapers[Math.floor(Math.random() * wallpapers.length)];
+  <script>
+    if (typeof wallpapers !== 'undefined' && Array.isArray(wallpapers) && wallpapers.length > 0) {
+      const randomWallpaper =
+        wallpapers[Math.floor(Math.random() * wallpapers.length)];
 
-  document.body.style.backgroundImage =
-    `url("${randomWallpaper}")`;
-</script>
+      document.body.style.backgroundImage =
+        `url("${randomWallpaper}")`;
+    }
+  </script>
 
   <!-- =====================================================
        LOGIN
@@ -1002,7 +1004,7 @@
         <div>
 
           <div class="empty-icon">
-            🛞
+            🔍
           </div>
 
           <p>
@@ -1068,7 +1070,7 @@
 
 
     /* =====================================================
-       SERVER
+       SERVER (CLOUDFLARE WORKER ENDPOINT)
     ===================================================== */
 
     const SERVER_URL =
@@ -1341,7 +1343,7 @@
 
 
     /* =====================================================
-       LOAD MESSAGES
+       LOAD MESSAGES (CLOUDFLARE WORKERS ROUTE)
     ===================================================== */
 
     async function loadMessages() {
@@ -1657,7 +1659,7 @@
 
 
     /* =====================================================
-       SEND
+       SEND (CLOUDFLARE WORKER ENDPOINT)
     ===================================================== */
 
     async function sendMessage() {
@@ -1774,7 +1776,7 @@
 
         alert(
           "Message could not be sent.\n\n" +
-          "Check that your Render server is running."
+          "Check that your Cloudflare Worker server is running."
         );
 
 
@@ -1981,12 +1983,12 @@
 
 
       /*
-        Poll every 500ms.
+        Poll every 500ms for updates from Cloudflare Worker KV/D1.
       */
 
       setInterval(
         loadMessages,
-        500
+        2000
       );
 
     }
